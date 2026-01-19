@@ -125,6 +125,19 @@
     text-overflow: ellipsis;
 }
 
+.picker-item-description {
+    color: var(--color-text-secondary);
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    display: block;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.8;
+}
+
 .picker-item-check {
     position: absolute;
     top: 8px;

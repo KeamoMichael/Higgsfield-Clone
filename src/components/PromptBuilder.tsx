@@ -48,6 +48,7 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
                 value: opt.value,
                 label: opt.label,
                 image: opt.image!,
+                description: opt.description,
             }));
     };
 

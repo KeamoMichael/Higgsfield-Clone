@@ -109,18 +109,26 @@ export const focalLengths: SelectOption[] = [
   { value: '200mm', label: '200mm Long Telephoto', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', description: 'Maximum background compression' },
 ];
 
-// Lens Types - with representative images
+// Lens Types - actual lens names with type as description
 export const lensTypes: SelectOption[] = [
-  { value: 'prime', label: 'Prime Lens', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop', description: 'Sharp, fast aperture' },
-  { value: 'anamorphic', label: 'Anamorphic Lens', image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop', description: 'Oval bokeh, horizontal flares' },
-  { value: 'wide-angle', label: 'Wide Angle Lens', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', description: 'Expanded field of view' },
-  { value: 'telephoto', label: 'Telephoto Lens', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', description: 'Compressed perspective' },
-  { value: 'macro', label: 'Macro Lens', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop', description: 'Extreme close-up detail' },
-  { value: 'tilt-shift', label: 'Tilt-Shift Lens', image: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&h=300&fit=crop', description: 'Selective focus, miniature effect' },
-  { value: 'fisheye', label: 'Fisheye Lens', image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop', description: '180° distorted view' },
-  { value: 'vintage', label: 'Vintage Lens', image: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=400&h=300&fit=crop', description: 'Soft, character, flares' },
-  { value: 'zeiss-master', label: 'Zeiss Master Prime', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop', description: 'Clinical sharpness' },
-  { value: 'cooke-s4', label: 'Cooke S4', image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=300&fit=crop', description: 'Warm, rounded look' },
+  { value: 'zeiss-master-prime', label: 'Zeiss Master Prime', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop', description: 'Prime Lens' },
+  { value: 'cooke-s4i', label: 'Cooke S4/i', image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=300&fit=crop', description: 'Prime Lens' },
+  { value: 'arri-signature-prime', label: 'ARRI Signature Prime', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop', description: 'Prime Lens' },
+  { value: 'panavision-primo', label: 'Panavision Primo', image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop', description: 'Prime Lens' },
+  { value: 'panavision-c-series', label: 'Panavision C-Series', image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop', description: 'Anamorphic Lens' },
+  { value: 'arri-master-anamorphic', label: 'ARRI Master Anamorphic', image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=300&fit=crop', description: 'Anamorphic Lens' },
+  { value: 'kowa-prominar', label: 'Kowa Prominar', image: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=400&h=300&fit=crop', description: 'Anamorphic Lens' },
+  { value: 'atlas-orion', label: 'Atlas Orion', image: 'https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&h=300&fit=crop', description: 'Anamorphic Lens' },
+  { value: 'canon-k35', label: 'Canon K35', image: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=400&h=300&fit=crop', description: 'Vintage Lens' },
+  { value: 'helios-44-2', label: 'Helios 44-2', image: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=400&h=300&fit=crop', description: 'Vintage Lens' },
+  { value: 'super-baltar', label: 'Super Baltar', image: 'https://images.unsplash.com/photo-1460134846237-51c777df6111?w=400&h=300&fit=crop', description: 'Vintage Lens' },
+  { value: 'zeiss-super-speed', label: 'Zeiss Super Speed', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop', description: 'Vintage Lens' },
+  { value: 'laowa-24mm-probe', label: 'Laowa 24mm Probe', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop', description: 'Macro Lens' },
+  { value: 'canon-mp-e-65mm', label: 'Canon MP-E 65mm', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop', description: 'Macro Lens' },
+  { value: 'sigma-14mm-art', label: 'Sigma 14mm Art', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', description: 'Wide Angle Lens' },
+  { value: 'canon-ts-e-24mm', label: 'Canon TS-E 24mm', image: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&h=300&fit=crop', description: 'Tilt-Shift Lens' },
+  { value: 'nikon-8mm-fisheye', label: 'Nikon 8mm Fisheye', image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop', description: 'Fisheye Lens' },
+  { value: 'canon-ef-200mm', label: 'Canon EF 200mm f/2L', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', description: 'Telephoto Lens' },
 ];
 
 // Film Stocks - with images showing color/grain characteristics
