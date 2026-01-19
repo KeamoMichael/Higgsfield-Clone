@@ -1,52 +1,99 @@
-/* Header Dark Mode Override */
+/* Cinema Studio Pro Header */
 .app-header {
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(60px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
 }
 
 .header-brand {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: 32px;
 }
 
 .header-title {
-    font-size: 18px;
-    font-weight: 800;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
     color: #FFFFFF;
     margin: 0;
-    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .header-title-accent {
-    color: var(--color-primary);
-    /* Neon Yellow */
-    opacity: 1;
-    font-weight: 800;
-    background: var(--color-primary);
+    font-size: 10px;
+    background: #c7ff00;
     color: #000;
     padding: 2px 6px;
     border-radius: 4px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+}
+
+.header-tagline {
     font-size: 11px;
-    margin-left: 6px;
-    vertical-align: middle;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .connect-btn {
-    padding: 8px 16px;
-    background: var(--color-primary);
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #e4ff5f 0%, #c7ff00 100%);
     border: none;
-    border-radius: 20px;
+    border-radius: 12px;
     color: #000000;
-    font-size: 11px;
-    font-weight: 800;
+    font-size: 12px;
+    font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: 0.02em;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 25px rgba(199, 255, 0, 0.25);
 }
 
 .connect-btn:hover {
-    background: #b3e600;
-    box-shadow: 0 0 15px rgba(204, 255, 0, 0.3);
+    background: linear-gradient(135deg, #edff91 0%, #d4ff33 100%);
+    box-shadow: 0 0 35px rgba(199, 255, 0, 0.35);
+    transform: scale(1.02);
+}
+
+.connect-btn:active {
+    transform: scale(0.98);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #00ff88;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
 }

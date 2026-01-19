@@ -162,6 +162,33 @@ body {
   z-index: 10;
 }
 
+/* Ambient Decorative Lighting */
+.ambient-glow-top {
+  position: fixed;
+  top: -20%;
+  left: -10%;
+  width: 60%;
+  height: 60%;
+  background: rgba(199, 255, 0, 0.05);
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow-bottom {
+  position: fixed;
+  bottom: -10%;
+  right: -10%;
+  width: 40%;
+  height: 40%;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Global Form overrides for dark mode */
 input,
 textarea,

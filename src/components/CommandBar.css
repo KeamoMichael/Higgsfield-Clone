@@ -3,113 +3,230 @@
     bottom: 32px;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
-    max-width: 800px;
-    z-index: 100;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 16px;
+    z-index: 50;
 }
 
-.command-bar-capsule {
-    background: #111111;
-    border: 1px solid #333333;
-    border-radius: 24px;
-    padding: 16px;
+.command-bar-wrapper {
+    background: rgba(18, 18, 18, 0.9);
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(60px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2.5rem;
+    padding: 28px;
     box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.5),
+        0 30px 100px rgba(0, 0, 0, 0.7),
         0 0 0 1px rgba(255, 255, 255, 0.05) inset;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
+    transition: all 0.3s ease;
 }
 
-.command-prompt-section {
-    padding: 0 8px;
+/* Prompt Section */
+.prompt-section {
+    width: 100%;
 }
 
-.command-input {
+.prompt-textarea {
     width: 100%;
     background: transparent;
     border: none;
-    color: #FFFFFF;
-    font-family: var(--font-family);
-    font-size: 14px;
+    outline: none;
+    color: #ffffff;
+    font-size: 15px;
     font-weight: 500;
     line-height: 1.5;
     resize: none;
-    max-height: 120px;
+    overflow-y: auto;
+    max-height: 180px;
+    min-height: 28px;
+    font-family: var(--font-family);
+    transition: height 0.2s ease;
 }
 
-.command-input:focus {
-    outline: none;
-    box-shadow: none;
+.prompt-textarea::placeholder {
+    color: #6b7280;
 }
 
-.command-input::placeholder {
-    color: #666;
+.prompt-textarea::-webkit-scrollbar {
+    display: none;
 }
 
-.command-divider {
-    height: 1px;
-    background: #222;
+/* Divider */
+.section-divider {
     width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 4px 0;
 }
 
-.command-controls-section {
+/* Controls Section */
+.controls-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-/* Resolution Group */
-.command-toggles {
+/* Left Controls */
+.left-controls {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 16px;
 }
 
-.command-icon-btn {
-    background: transparent;
-    border: none;
-    color: #666;
-    padding: 4px;
-    cursor: pointer;
+.aspect-ratio-wrapper {
+    position: relative;
 }
 
-.res-group {
+.aspect-ratio-btn {
+    width: 40px;
+    height: 40px;
     display: flex;
-    background: #000;
-    border-radius: 8px;
-    padding: 2px;
-}
-
-.res-btn {
+    align-items: center;
+    justify-content: center;
     background: transparent;
     border: none;
-    color: #444;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 4px 8px;
-    border-radius: 6px;
+    border-radius: 12px;
+    color: #9ca3af;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
 }
 
-.res-btn:hover {
-    color: #888;
+.aspect-ratio-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.res-btn.active {
-    background: #333;
-    color: #fff;
+.aspect-ratio-btn.active {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
 }
 
-/* Tools Group */
-.command-tools {
+.aspect-ratio-menu {
+    position: absolute;
+    bottom: calc(100% + 16px);
+    left: 0;
+    width: 176px;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 8px 12px;
+    margin-bottom: 4px;
+}
+
+.menu-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    color: #6b7280;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.menu-item.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.menu-item.active svg {
+    color: #c7ff00;
+}
+
+.vertical-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 4px;
+}
+
+.resolution-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.res-toggle {
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.res-toggle:hover {
+    color: #9ca3af;
+}
+
+.res-toggle.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+/* Right Controls */
+.right-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.tools-strip {
     display: flex;
     align-items: center;
     gap: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 8px;
 }
 
-.tool-btn {
+.tool-icon {
     width: 36px;
     height: 36px;
     display: flex;
@@ -117,72 +234,74 @@
     justify-content: center;
     background: transparent;
     border: none;
-    border-radius: 50%;
-    color: #666;
+    border-radius: 8px;
+    font-size: 16px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
+    opacity: 0.5;
 }
 
-.tool-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
+.tool-icon:hover {
+    opacity: 0.8;
+    background: rgba(34, 34, 34, 1);
 }
 
-.tool-btn.active {
-    color: var(--color-primary);
-    background: rgba(204, 255, 0, 0.1);
-}
-
-/* Action Group */
-.command-action {
-    display: flex;
-    align-items: center;
+.tool-icon.active {
+    background: #ffffff;
+    opacity: 1;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    transform: scale(1);
 }
 
 .generate-btn {
-    background: var(--color-primary);
-    color: #000;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 36px;
+    height: 48px;
+    min-width: 150px;
+    background: linear-gradient(135deg, #e4ff5f 0%, #c7ff00 100%);
+    border: none;
+    border-radius: 16px;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 0 15px rgba(204, 255, 0, 0.2);
+    transition: all 0.2s ease;
+    box-shadow: 0 15px 30px rgba(199, 255, 0, 0.2);
 }
 
 .generate-btn:hover {
-    background: #b3e600;
+    background: linear-gradient(135deg, #edff91 0%, #d4ff33 100%);
+    box-shadow: 0 20px 40px rgba(199, 255, 0, 0.3);
     transform: translateY(-1px);
-    box-shadow: 0 0 25px rgba(204, 255, 0, 0.4);
+}
+
+.generate-btn:active {
+    transform: scale(0.95);
 }
 
 .generate-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
 }
 
-.btn-icon {
-    font-size: 14px;
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top-color: #000000;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
 
-@media (max-width: 600px) {
-    .desktop-only {
-        display: none;
-    }
-
-    .res-btn {
-        padding: 4px 6px;
-    }
-
-    .command-tools {
-        gap: 4px;
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
     }
 }

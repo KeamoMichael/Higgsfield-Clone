@@ -215,6 +215,10 @@ function App() {
           currentKey={hasApiKey() ? '••••••••••••••••••••' : ''}
         />
       )}
+
+      {/* Decorative Ambient Lighting */}
+      <div className="ambient-glow-top"></div>
+      <div className="ambient-glow-bottom"></div>
     </div>
   );
 }

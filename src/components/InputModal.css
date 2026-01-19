@@ -2,11 +2,13 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 900;
+    z-index: 60;
+    /* Above CommandBar (z-50) */
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding-bottom: 120px; /* Space for Command Bar */
+    padding-bottom: 160px;
+    /* Space for Command Bar */
 }
 
 .input-modal-overlay.visible {
@@ -22,7 +24,7 @@
     width: 90%;
     max-width: 500px;
     max-height: 70vh;
-    box-shadow: 
+    box-shadow:
         0 20px 50px rgba(0, 0, 0, 0.8),
         0 0 0 1px rgba(255, 255, 255, 0.05) inset;
     display: flex;
@@ -36,7 +38,7 @@
 .input-modal-card.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
 }
 
 .input-modal-header {
@@ -97,6 +99,7 @@
 .input-modal-content::-webkit-scrollbar {
     width: 6px;
 }
+
 .input-modal-content::-webkit-scrollbar-thumb {
     background: #333;
     border-radius: 3px;
