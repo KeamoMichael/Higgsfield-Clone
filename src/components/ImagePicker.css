@@ -113,6 +113,20 @@
     background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.95) 100%);
 }
 
+.picker-item-description {
+    color: var(--color-text-secondary);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.85;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
 .picker-item-label {
     color: var(--color-text-primary);
     font-size: 11px;
@@ -124,20 +138,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.3;
-}
-
-.picker-item-description {
-    color: var(--color-text-secondary);
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.2px;
-    display: block;
-    margin-top: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    opacity: 0.85;
-    line-height: 1.2;
 }
 
 .picker-item-check {

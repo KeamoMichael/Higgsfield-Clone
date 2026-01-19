@@ -82,10 +82,10 @@ function ImagePicker({
                         >
                             <img src={option.image} alt={option.label} loading="lazy" />
                             <div className="picker-item-overlay">
-                                <span className="picker-item-label">{option.label}</span>
                                 {option.description && (
                                     <span className="picker-item-description">{option.description}</span>
                                 )}
+                                <span className="picker-item-label">{option.label}</span>
                             </div>
                             {selectedValue === option.value && (
                                 <div className="picker-item-check">
