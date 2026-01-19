@@ -119,12 +119,12 @@
     font-weight: 400;
     letter-spacing: 0.2px;
     display: block;
+    margin-top: 20px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     opacity: 0.85;
     line-height: 1.2;
-    margin-bottom: 2px;
 }
 
 .picker-item-label {
