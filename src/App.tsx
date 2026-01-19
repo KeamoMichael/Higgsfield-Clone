@@ -11,7 +11,7 @@ import SubjectForm from './components/SubjectForm';
 import type { PromptData } from './services/promptBuilder';
 import { assemblePrompt, generateSceneJSON } from './services/promptBuilder';
 import type { GenerationResult } from './services/geminiService';
-import { initializeGemini, isInitialized, generateImage, generateSceneVariations } from './services/geminiService';
+import { initializeGemini, isInitialized, generateImage } from './services/geminiService';
 import { loadApiKey, saveApiKey, hasApiKey } from './services/storage';
 
 const initialPromptData: PromptData = {
@@ -46,7 +46,6 @@ function App() {
   const [resolution, setResolution] = useState('1k');
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
-  const [sceneVariations, setSceneVariations] = useState<GenerationResult[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [referenceImages, setReferenceImages] = useState<ReferenceImage[]>([]);
 
@@ -58,10 +57,7 @@ function App() {
     return assemblePrompt(promptData);
   }, [promptData]);
 
-  // Scene JSON for export
-  const sceneJSON = useMemo(() => {
-    return generateSceneJSON(promptData, assembledPrompt);
-  }, [promptData, assembledPrompt]);
+
 
   // Load API key on mount
   useEffect(() => {
@@ -142,7 +138,6 @@ function App() {
             prompt={assembledPrompt}
             isGenerating={isGenerating}
             generatedImage={generatedImage}
-            sceneVariations={sceneVariations}
             error={error}
             apiConnected={apiConnected}
             onUseAsReference={handleUseAsReference}

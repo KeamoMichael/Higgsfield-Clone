@@ -5,7 +5,6 @@ interface OutputPanelProps {
     prompt: string;
     isGenerating: boolean;
     generatedImage: string | null;
-    sceneVariations: GenerationResult[];
     error: string | null;
     apiConnected: boolean;
     onUseAsReference: (imageUrl: string) => void;
@@ -15,7 +14,6 @@ function OutputPanel({
     prompt,
     isGenerating,
     generatedImage,
-    sceneVariations,
     error,
     apiConnected,
     onUseAsReference,
@@ -108,31 +106,6 @@ function OutputPanel({
                     )}
                 </div>
             </div>
-
-            {/* Scene Variations Grid */}
-            {sceneVariations.length > 0 && (
-                <div className="render-section">
-                    <h3 className="render-section-title">
-                        <span className="render-marker"></span>
-                        SCENE VARIATIONS (SET 1/1)
-                    </h3>
-
-                    <div className="scene-grid">
-                        {sceneVariations.map((result, index) => (
-                            <div key={index} className="scene-card">
-                                <span className="scene-label">ANGLE {index + 1}</span>
-                                {result.success && result.imageUrl ? (
-                                    <img src={result.imageUrl} alt={`Angle ${index + 1}`} />
-                                ) : (
-                                    <div className="scene-placeholder">
-                                        <span>Failed</span>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
 
             {/* Model Indicator */}
             <div className="model-indicator" style={{ marginTop: 'var(--spacing-lg)', textAlign: 'center' }}>
