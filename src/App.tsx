@@ -5,8 +5,10 @@ import SettingsModal from './components/SettingsModal';
 import PromptBuilder from './components/PromptBuilder';
 import OutputPanel from './components/OutputPanel';
 import ElementsTool from './components/ElementsTool';
-import { PromptData, assemblePrompt, generateSceneJSON } from './services/promptBuilder';
-import { initializeGemini, isInitialized, generateImage, generateSceneVariations, GenerationResult } from './services/geminiService';
+import type { PromptData } from './services/promptBuilder';
+import { assemblePrompt, generateSceneJSON } from './services/promptBuilder';
+import type { GenerationResult } from './services/geminiService';
+import { initializeGemini, isInitialized, generateImage, generateSceneVariations } from './services/geminiService';
 import { loadApiKey, saveApiKey, hasApiKey } from './services/storage';
 
 const initialPromptData: PromptData = {

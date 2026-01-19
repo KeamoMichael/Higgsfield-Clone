@@ -1,4 +1,5 @@
-import { GoogleGenerativeAI, Part } from '@google/generative-ai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import type { Part } from '@google/generative-ai';
 
 let genAI: GoogleGenerativeAI | null = null;
 

@@ -1,5 +1,5 @@
 import './PromptBuilder.css';
-import { PromptData } from '../services/promptBuilder';
+import type { PromptData } from '../services/promptBuilder';
 import {
     shotTypes,
     viewingDirections,

@@ -1,5 +1,5 @@
 import './OutputPanel.css';
-import { GenerationResult } from '../services/geminiService';
+import type { GenerationResult } from '../services/geminiService';
 
 interface OutputPanelProps {
     prompt: string;

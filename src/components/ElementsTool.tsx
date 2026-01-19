@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import './ElementsTool.css';
-import { ReferenceImage } from '../App';
+import type { ReferenceImage } from '../App';
 
 interface ElementsToolProps {
     referenceImages: ReferenceImage[];
