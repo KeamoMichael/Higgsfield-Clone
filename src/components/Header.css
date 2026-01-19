@@ -1,27 +1,34 @@
 .header-brand {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 0px;
 }
 
 .header-title {
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: 1px;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    /* Tighter, more modern tracking */
     color: var(--color-text-primary);
     margin: 0;
 }
 
 .header-title-accent {
-    color: var(--color-primary);
+    color: var(--color-text-primary);
+    /* Unified color */
+    font-weight: 400;
+    /* Contrast by weight instead of color */
+    opacity: 0.6;
 }
 
 .header-tagline {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 1px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
     color: var(--color-text-muted);
     text-transform: uppercase;
+    display: none;
+    /* Hide tagline for cleaner look */
 }
 
 .header-actions {

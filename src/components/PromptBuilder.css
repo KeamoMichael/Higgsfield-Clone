@@ -5,42 +5,62 @@
 }
 
 .section {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-}
-
-.section-header {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-md);
-    padding-bottom: var(--spacing-sm);
+    background: transparent;
+    /* Seamless blend */
+    border: none;
+    padding: var(--spacing-md) 0;
     border-bottom: 1px solid var(--color-border);
+    /* Separator lines instead of boxes */
 }
 
-.section-icon {
-    font-size: 18px;
+/* Remove border from last section */
+.section:last-child {
+    border-bottom: none;
 }
 
-.section-title {
-    font-size: 13px;
+.section-.header-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.header-title {
+    font-size: 20px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    letter-spacing: -0.5px;
+    /* Tighter, more modern tracking */
     color: var(--color-text-primary);
     margin: 0;
 }
 
+.header-title-accent {
+    color: var(--color-text-primary);
+    /* Unified color */
+    font-weight: 400;
+    /* Contrast by weight instead of color */
+    opacity: 0.6;
+}
+
+.header-tagline {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    display: none;
+    /* Hide tagline for cleaner look, or keep very subtle */
+}
+
 /* Visual Select Button */
+/* Visual Select Button - Modern Pill Style */
 .visual-select-btn {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
     width: 100%;
-    padding: var(--spacing-sm);
-    background: var(--color-surface-elevated);
-    border: 1px solid var(--color-border);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: transparent;
+    border: 1px solid transparent;
     border-radius: var(--radius-md);
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -48,8 +68,8 @@
 }
 
 .visual-select-btn:hover {
-    border-color: var(--color-primary);
     background: var(--color-surface-hover);
+    /* No border on hover, just soft fill */
 }
 
 .visual-select-thumb {
