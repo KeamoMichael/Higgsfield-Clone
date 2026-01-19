@@ -129,13 +129,15 @@ body {
   color: var(--color-text-muted);
 }
 
-/* Layout */
+/* Layout - Modern & Airy */
 .app-layout {
   display: grid;
-  grid-template-columns: 380px 1fr 320px;
+  grid-template-columns: 360px 1fr 340px;
+  /* Slightly adjusted widths */
   grid-template-rows: auto 1fr;
   height: 100vh;
   overflow: hidden;
+  background-color: var(--color-background);
 }
 
 .app-header {
@@ -143,25 +145,31 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-xl);
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
+  z-index: 10;
 }
 
 .panel {
   overflow-y: auto;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-xl);
 }
 
 .panel-left {
-  background: var(--color-background);
+  background: var(--color-surface);
   border-right: 1px solid var(--color-border);
+  /* Optional: Remove border and use shadow for floaty feel */
+  /* box-shadow: var(--shadow-sm); z-index: 5; border: none; */
 }
 
 .panel-center {
   background: var(--color-background);
+  /* Canvas background */
   display: flex;
   flex-direction: column;
+  padding: var(--spacing-2xl);
+  /* More breathing room for canvas */
 }
 
 .panel-right {
