@@ -6,27 +6,25 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    padding-bottom: 120px;
+    padding-bottom: 120px; /* Space for Command Bar */
 }
 
 .input-modal-overlay.visible {
     pointer-events: auto;
-    background: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
 }
 
 .input-modal-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: #111111;
+    border: 1px solid #333333;
     border-radius: 20px;
     width: 90%;
     max-width: 500px;
     max-height: 70vh;
-    box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
     display: flex;
     flex-direction: column;
     opacity: 0;
@@ -38,6 +36,7 @@
 .input-modal-card.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.9);
 }
 
 .input-modal-header {
@@ -45,9 +44,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 24px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
+    border-bottom: 1px solid #222;
+    background: #0f0f0f;
 }
 
 .input-modal-title-group {
@@ -63,10 +61,10 @@
 .input-modal-title {
     font-size: 16px;
     font-weight: 800;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     margin: 0;
-    color: var(--color-text-primary);
+    color: #fff;
 }
 
 .input-modal-close {
@@ -74,8 +72,8 @@
     height: 32px;
     border-radius: 50%;
     border: none;
-    background: rgba(0, 0, 0, 0.05);
-    color: var(--color-text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+    color: #888;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,22 +82,22 @@
 }
 
 .input-modal-close:hover {
-    background: rgba(0, 0, 0, 0.1);
-    color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
 }
 
 .input-modal-content {
     padding: 24px;
     overflow-y: auto;
     overscroll-behavior: contain;
+    background: #000;
 }
 
 /* Scrollbar tweaks for modal content */
 .input-modal-content::-webkit-scrollbar {
     width: 6px;
 }
-
 .input-modal-content::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.15);
+    background: #333;
     border-radius: 3px;
 }

@@ -1,12 +1,8 @@
-/* Header with Glassmorphism */
+/* Header Dark Mode Override */
 .app-header {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(30px) saturate(180%);
-    -webkit-backdrop-filter: blur(30px) saturate(180%);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow:
-        0 1px 3px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .header-brand {
@@ -18,46 +14,39 @@
 .header-title {
     font-size: 18px;
     font-weight: 800;
-    color: var(--color-text-primary);
+    color: #FFFFFF;
     margin: 0;
+    letter-spacing: -0.5px;
 }
 
 .header-title-accent {
-    color: var(--color-text-primary);
-    opacity: 0.6;
-    font-weight: 600;
-}
-
-.header-status {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--color-success);
-}
-
-.status-dot.disconnected {
-    background: var(--color-error);
+    color: var(--color-primary);
+    /* Neon Yellow */
+    opacity: 1;
+    font-weight: 800;
+    background: var(--color-primary);
+    color: #000;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-left: 6px;
+    vertical-align: middle;
 }
 
 .connect-btn {
     padding: 8px 16px;
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    color: var(--color-text-primary);
-    font-size: 13px;
-    font-weight: 600;
+    background: var(--color-primary);
+    border: none;
+    border-radius: 20px;
+    color: #000000;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .connect-btn:hover {
-    background: rgba(0, 0, 0, 0.08);
-    border-color: rgba(0, 0, 0, 0.15);
+    background: #b3e600;
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.3);
 }

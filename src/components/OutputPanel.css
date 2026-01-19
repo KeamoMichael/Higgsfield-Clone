@@ -1,137 +1,116 @@
+/* Dark Mode Output Panel */
 .output-panel {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-.action-bar {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
-    flex-wrap: wrap;
+.prompt-preview {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-bottom: var(--spacing-xl);
+    text-align: left;
+    max-width: 800px;
+}
+
+.prompt-preview-label {
+    display: none;
+    /* Hide label for cleaner look */
+}
+
+.prompt-preview-text {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    font-family: var(--font-family);
+    margin: 0;
 }
 
 .render-section {
-    margin-top: var(--spacing-lg);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .render-section-title {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    margin-bottom: var(--spacing-md);
-}
-
-.render-marker {
-    display: inline-block;
-    width: 3px;
-    height: 16px;
-    background: var(--color-primary);
-    border-radius: 2px;
+    display: none;
 }
 
 .output-area {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-2xl);
-    margin-bottom: var(--spacing-xl);
-    min-height: 400px;
+    width: 100%;
+    aspect-ratio: 16/9;
+    max-height: 60vh;
+    background: #080808;
+    border: 1px solid #222;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
 }
 
 .output-placeholder {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-md);
-    color: var(--color-text-muted);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    gap: 16px;
+    color: #333;
 }
 
 .output-placeholder-icon {
-    width: 64px;
-    height: 64px;
-    opacity: 0.3;
+    width: 48px;
+    height: 48px;
+    opacity: 0.2;
 }
 
 .image-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.output-image {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.image-actions {
-    display: flex;
-    gap: var(--spacing-sm);
-    padding: var(--spacing-md);
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.scene-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-}
-
-.scene-card {
-    position: relative;
-    aspect-ratio: 16/9;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-}
-
-.scene-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.scene-label {
-    position: absolute;
-    top: var(--spacing-sm);
-    left: var(--spacing-sm);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(0, 0, 0, 0.75);
-    color: white;
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    border-radius: var(--radius-sm);
-    z-index: 1;
-}
-
-.scene-placeholder {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text-muted);
-    font-size: 12px;
+}
+
+.output-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Hover Actions for Image */
+.image-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.output-area:hover .image-actions {
+    opacity: 1;
+}
+
+/* Info Messages */
+.info-message {
+    padding: 12px;
+    background: rgba(239, 68, 68, 0.1);
+    color: #EF4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
 }

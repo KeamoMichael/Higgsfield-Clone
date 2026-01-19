@@ -54,60 +54,11 @@ function OutputPanel({
                 </div>
             )}
 
-            {/* Action Bar */}
-            <div className="action-bar">
-                {/* Resolution Selector */}
-                <div className="resolution-selector">
-                    {['1k', '2k', '4k'].map(res => (
-                        <button
-                            key={res}
-                            className={`resolution-btn ${resolution === res ? 'active' : ''}`}
-                            onClick={() => onResolutionChange(res)}
-                        >
-                            {res.toUpperCase()}
-                        </button>
-                    ))}
-                </div>
-
-                {/* Copy Buttons */}
-                <button className="btn btn-secondary" onClick={onCopyPrompt} title="Copy prompt to clipboard">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                    </svg>
-                    COPY PROMPT
-                </button>
-
-                <button className="btn btn-secondary" onClick={onCopySceneJSON} title="Copy scene JSON">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                    </svg>
-                    COPY SCENE JSON
-                </button>
-
-                {/* Generate Button */}
-                <button
-                    className="btn btn-generate"
-                    onClick={onGenerate}
-                    disabled={isGenerating || !apiConnected}
-                >
-                    {isGenerating ? 'GENERATING...' : 'GENERATE IMAGE ✨'}
-                </button>
-            </div>
-
-            {/* Multi-Angle Button */}
-            <button
-                className="btn btn-scene btn-full"
-                onClick={onGenerateScene}
-                disabled={isGenerating || !apiConnected}
-            >
-                ✨ GENERATE SCENE (4 RANDOM ANGLES, CONSISTENT CHARACTER)
-            </button>
+            {/* Action Bar Removed - moved to CommandBar */}
 
             {/* Error Display */}
             {error && (
-                <div className="info-message" style={{ marginTop: 'var(--spacing-md)' }}>
+                <div className="info-message error-message">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <circle cx="12" cy="12" r="10" />
                         <line x1="15" y1="9" x2="9" y2="15" />

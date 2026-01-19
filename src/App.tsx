@@ -5,7 +5,8 @@ import SettingsModal from './components/SettingsModal';
 import PromptBuilder from './components/PromptBuilder';
 import OutputPanel from './components/OutputPanel';
 import ElementsTool from './components/ElementsTool';
-import FloatingDock from './components/FloatingDock';
+import ElementsTool from './components/ElementsTool';
+import CommandBar from './components/CommandBar';
 import InputModal from './components/InputModal';
 import SubjectForm from './components/SubjectForm';
 import { FilmIcon, LightIcon, CameraIcon, PaletteIcon, LayersIcon } from './components/DockIcons';
@@ -195,11 +196,16 @@ function App() {
         </div>
       </main>
 
-      {/* 3. Floating Dock */}
-      <FloatingDock
-        items={dockItems}
-        activeId={activeTool}
-        onSelect={setActiveTool}
+      {/* 3. Command Bar (Replaces Floating Dock) */}
+      <CommandBar
+        prompt={promptData.subjectAction}
+        onPromptChange={(val) => updatePromptData('subjectAction', val)}
+        onGenerate={handleGenerate}
+        isGenerating={isGenerating}
+        activeTool={activeTool}
+        onToggleTool={(tool) => setActiveTool(activeTool === tool ? null : tool)}
+        resolution={resolution}
+        onResolutionChange={setResolution}
       />
 
       {/* 4. Tool Modals */}
