@@ -1,5 +1,8 @@
+import { useState, useMemo } from 'react';
 import './PromptBuilder.css';
 import type { PromptData } from '../services/promptBuilder';
+import ImagePicker from './ImagePicker';
+import type { PickerOption } from './ImagePicker';
 import {
     shotTypes,
     viewingDirections,
@@ -21,7 +24,117 @@ interface PromptBuilderProps {
     onChange: (field: keyof PromptData, value: string) => void;
 }
 
+type PickerType =
+    | 'lightingSource'
+    | 'atmosphere'
+    | 'cameraBody'
+    | 'filmStock'
+    | 'photographyGenre'
+    | 'photographerStyle'
+    | 'movieLook'
+    | null;
+
 function PromptBuilder({ data, onChange }: PromptBuilderProps) {
+    const [activePicker, setActivePicker] = useState<PickerType>(null);
+
+    // Convert options to picker format (filter to only those with images)
+    const getPickerOptions = (options: typeof lightingSources): PickerOption[] => {
+        return options
+            .filter(opt => opt.image)
+            .map(opt => ({
+                value: opt.value,
+                label: opt.label,
+                image: opt.image!,
+            }));
+    };
+
+    // Get label for selected value
+    const getSelectedLabel = (options: typeof lightingSources, value: string): string => {
+        const opt = options.find(o => o.value === value);
+        return opt?.label || 'Select style...';
+    };
+
+    // Get image for selected value
+    const getSelectedImage = (options: typeof lightingSources, value: string): string | undefined => {
+        const opt = options.find(o => o.value === value);
+        return opt?.image;
+    };
+
+    const pickerConfigs = useMemo(() => ({
+        lightingSource: {
+            title: 'SELECT LIGHTING SOURCE',
+            subtitle: `// ${lightingSources.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(lightingSources),
+        },
+        atmosphere: {
+            title: 'SELECT ATMOSPHERE / MOOD',
+            subtitle: `// ${atmospheres.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(atmospheres),
+        },
+        cameraBody: {
+            title: 'SELECT CAMERA BODY',
+            subtitle: `// ${cameraBodies.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(cameraBodies),
+        },
+        filmStock: {
+            title: 'SELECT FILM STOCK',
+            subtitle: `// ${filmStocks.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(filmStocks),
+        },
+        photographyGenre: {
+            title: 'SELECT PHOTOGRAPHY GENRE',
+            subtitle: `// ${photographyGenres.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(photographyGenres),
+        },
+        photographerStyle: {
+            title: 'SELECT PHOTOGRAPHER STYLE',
+            subtitle: `// ${photographerStyles.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(photographerStyles),
+        },
+        movieLook: {
+            title: 'SELECT MOVIE LOOK / AESTHETIC',
+            subtitle: `// ${movieLooks.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(movieLooks),
+        },
+    }), []);
+
+    const renderVisualSelect = (
+        field: PickerType,
+        label: string,
+        options: typeof lightingSources,
+        value: string
+    ) => {
+        const selectedImage = getSelectedImage(options, value);
+        const selectedLabel = getSelectedLabel(options, value);
+
+        return (
+            <div className="form-group">
+                <label className="form-label">{label}</label>
+                <button
+                    type="button"
+                    className="visual-select-btn"
+                    onClick={() => setActivePicker(field)}
+                >
+                    {selectedImage ? (
+                        <img src={selectedImage} alt={selectedLabel} className="visual-select-thumb" />
+                    ) : (
+                        <div className="visual-select-placeholder">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <polyline points="21 15 16 10 5 21" />
+                            </svg>
+                        </div>
+                    )}
+                    <span className="visual-select-label">{selectedLabel}</span>
+                    <svg className="visual-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                </button>
+            </div>
+        );
+    };
+
     return (
         <div className="prompt-builder">
             {/* Section 1: Subject & Framing */}
@@ -90,33 +203,8 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
                     <h2 className="section-title">02. LIGHTING & MOOD</h2>
                 </div>
 
-                <div className="form-group">
-                    <label className="form-label">LIGHTING SOURCE</label>
-                    <select
-                        className="form-select"
-                        value={data.lightingSource}
-                        onChange={e => onChange('lightingSource', e.target.value)}
-                    >
-                        <option value="">Select style...</option>
-                        {lightingSources.map(opt => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="form-group">
-                    <label className="form-label">ATMOSPHERE / MOOD</label>
-                    <select
-                        className="form-select"
-                        value={data.atmosphere}
-                        onChange={e => onChange('atmosphere', e.target.value)}
-                    >
-                        <option value="">E.g., moody, cinematic, lonely, melancholic...</option>
-                        {atmospheres.map(opt => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                    </select>
-                </div>
+                {renderVisualSelect('lightingSource', 'LIGHTING SOURCE', lightingSources, data.lightingSource)}
+                {renderVisualSelect('atmosphere', 'ATMOSPHERE / MOOD', atmospheres, data.atmosphere)}
             </div>
 
             {/* Section 3: Camera Gear */}
@@ -127,20 +215,12 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
                 </div>
 
                 <div className="form-grid">
-                    <div className="form-group">
-                        <label className="form-label">CAMERA BODY</label>
-                        <select
-                            className="form-select"
-                            value={data.cameraBody}
-                            onChange={e => onChange('cameraBody', e.target.value)}
-                        >
-                            <option value="">Select style...</option>
-                            {cameraBodies.map(opt => (
-                                <option key={opt.value} value={opt.value}>{opt.label}</option>
-                            ))}
-                        </select>
+                    <div className="form-group form-grid-full">
+                        {renderVisualSelect('cameraBody', 'CAMERA BODY', cameraBodies, data.cameraBody)}
                     </div>
+                </div>
 
+                <div className="form-grid">
                     <div className="form-group">
                         <label className="form-label">FOCAL LENGTH</label>
                         <select
@@ -154,9 +234,7 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
                             ))}
                         </select>
                     </div>
-                </div>
 
-                <div className="form-grid">
                     <div className="form-group">
                         <label className="form-label">LENS TYPE</label>
                         <select
@@ -170,21 +248,9 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
                             ))}
                         </select>
                     </div>
-
-                    <div className="form-group">
-                        <label className="form-label">FILM STOCK</label>
-                        <select
-                            className="form-select"
-                            value={data.filmStock}
-                            onChange={e => onChange('filmStock', e.target.value)}
-                        >
-                            <option value="">Select style...</option>
-                            {filmStocks.map(opt => (
-                                <option key={opt.value} value={opt.value}>{opt.label}</option>
-                            ))}
-                        </select>
-                    </div>
                 </div>
+
+                {renderVisualSelect('filmStock', 'FILM STOCK', filmStocks, data.filmStock)}
             </div>
 
             {/* Section 4: Style & Aesthetics */}
@@ -194,47 +260,9 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
                     <h2 className="section-title">04. STYLE & AESTHETICS</h2>
                 </div>
 
-                <div className="form-group">
-                    <label className="form-label">PHOTOGRAPHY GENRE</label>
-                    <select
-                        className="form-select"
-                        value={data.photographyGenre}
-                        onChange={e => onChange('photographyGenre', e.target.value)}
-                    >
-                        <option value="">Choose a genre...</option>
-                        {photographyGenres.map(opt => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="form-group">
-                    <label className="form-label">PHOTOGRAPHER STYLE</label>
-                    <select
-                        className="form-select"
-                        value={data.photographerStyle}
-                        onChange={e => onChange('photographerStyle', e.target.value)}
-                    >
-                        <option value="">Select style...</option>
-                        {photographerStyles.map(opt => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="form-group">
-                    <label className="form-label">MOVIE LOOK / AESTHETIC</label>
-                    <select
-                        className="form-select"
-                        value={data.movieLook}
-                        onChange={e => onChange('movieLook', e.target.value)}
-                    >
-                        <option value="">Choose a movie style...</option>
-                        {movieLooks.map(opt => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                    </select>
-                </div>
+                {renderVisualSelect('photographyGenre', 'PHOTOGRAPHY GENRE', photographyGenres, data.photographyGenre)}
+                {renderVisualSelect('photographerStyle', 'PHOTOGRAPHER STYLE', photographerStyles, data.photographerStyle)}
+                {renderVisualSelect('movieLook', 'MOVIE LOOK / AESTHETIC', movieLooks, data.movieLook)}
 
                 <div className="form-group">
                     <label className="form-label">FILTER / EFFECT</label>
@@ -263,6 +291,18 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
                     </select>
                 </div>
             </div>
+
+            {/* Image Picker Modals */}
+            {activePicker && pickerConfigs[activePicker] && (
+                <ImagePicker
+                    title={pickerConfigs[activePicker].title}
+                    subtitle={pickerConfigs[activePicker].subtitle}
+                    options={pickerConfigs[activePicker].options}
+                    selectedValue={data[activePicker]}
+                    onSelect={(value) => onChange(activePicker, value)}
+                    onClose={() => setActivePicker(null)}
+                />
+            )}
         </div>
     );
 }
