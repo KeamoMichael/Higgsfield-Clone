@@ -9,8 +9,8 @@ import CommandBar from './components/CommandBar';
 import InputModal from './components/InputModal';
 import SubjectForm from './components/SubjectForm';
 import type { PromptData } from './services/promptBuilder';
-import { assemblePrompt, generateSceneJSON } from './services/promptBuilder';
-import type { GenerationResult } from './services/geminiService';
+import { assemblePrompt } from './services/promptBuilder';
+
 import { initializeGemini, isInitialized, generateImage } from './services/geminiService';
 import { loadApiKey, saveApiKey, hasApiKey } from './services/storage';
 
