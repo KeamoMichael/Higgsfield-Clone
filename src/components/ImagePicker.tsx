@@ -43,8 +43,8 @@ function ImagePicker({
     };
 
     return createPortal(
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="picker-modal" onClick={e => e.stopPropagation()}>
+        <div className="picker-modal" onClick={onClose}>
+            <div className="picker-content" onClick={e => e.stopPropagation()}>
                 <div className="picker-header">
                     <div className="picker-title-group">
                         <h2 className="picker-title">{title}</h2>
