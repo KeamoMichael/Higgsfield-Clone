@@ -1,151 +1,123 @@
-/* Image Picker Modal - lightbox style (Dark Theme Override) */
+/* Light Glassmorphic Theme for Image Picker */
 .picker-modal {
-    /* Define local dark theme variables */
-    --local-bg: #111111;
-    --local-surface: #1a1a1a;
-    --local-border: #333333;
-    --local-text: #ffffff;
-    --local-text-muted: #888888;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
 
-    background: var(--local-bg);
-    border: 1px solid var(--local-border);
-    border-radius: var(--radius-xl);
-    min-width: 750px;
+.picker-content {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    width: 90vw;
     max-width: 900px;
-    max-height: 85vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    /* Deep shadow */
-    color: var(--local-text);
-}
-
-.picker-modal .picker-title {
-    color: var(--local-text);
-}
-
-.picker-modal .picker-subtitle {
-    color: var(--local-text-muted);
-}
-
-.picker-modal .picker-header {
-    border-bottom-color: var(--local-border);
-}
-
-.picker-modal .search-input {
-    background: var(--local-surface);
-    border-color: var(--local-border);
-    color: var(--local-text);
-}
-
-.picker-modal .picker-item {
-    background: var(--local-surface);
-}
-
-.picker-modal .picker-item:hover {
-    border-color: #555;
-}
-
-.picker-modal ::-webkit-scrollbar-thumb {
-    background: #444;
-}
-
-.picker-modal ::-webkit-scrollbar-track {
-    background: transparent;
+    overflow: hidden;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .picker-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: var(--spacing-lg);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.picker-title-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    padding: 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
 }
 
 .picker-title {
     font-size: 18px;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    margin: 0;
-    text-transform: uppercase;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 4px 0;
     letter-spacing: 0.5px;
 }
 
 .picker-subtitle {
-    font-size: 12px;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    font-size: 13px;
+    color: #6B7280;
+    margin: 0;
 }
 
 .picker-search {
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: 0 24px 16px;
+    background: rgba(255, 255, 255, 0.5);
 }
 
-.search-input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.search-input-wrapper svg {
-    position: absolute;
-    left: 12px;
-    color: var(--color-text-muted);
-    pointer-events: none;
-}
-
+.picker-search input,
 .search-input {
-    padding-left: 40px !important;
-    border-color: var(--color-primary) !important;
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    color: #111827;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.picker-search input::placeholder,
+.search-input::placeholder {
+    color: #9CA3AF;
+}
+
+.picker-search input:focus,
+.search-input:focus {
+    outline: none;
+    background: #FFFFFF;
+    border-color: #000000;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.picker-grid-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 24px 24px;
 }
 
 .picker-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(200px, auto);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
-    padding: 0 var(--spacing-lg) var(--spacing-lg);
-    overflow-y: auto;
-    max-height: 500px;
+    grid-auto-rows: 240px;
 }
 
 .picker-item {
     position: relative;
-    width: 100%;
-    height: 200px;
-    background: var(--color-surface-elevated);
-    border: 2px solid transparent;
-    border-radius: var(--radius-md);
+    height: 240px;
+    border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .picker-item:hover {
-    border-color: var(--color-border-light);
-    transform: scale(1.02);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.15);
 }
 
 .picker-item.selected {
-    border-color: var(--color-primary);
+    border: 2px solid #000000;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
-.picker-item img {
+.picker-item-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-normal);
-}
-
-.picker-item:hover img {
-    transform: scale(1.05);
 }
 
 .picker-item-overlay {
@@ -153,98 +125,57 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 55px 12px 18px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.95) 100%);
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(0, 0, 0, 0.5) 50%,
+            transparent 100%);
+    padding: 16px;
+    padding-top: 60px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    /* Ensure items start from left */
     gap: 4px;
-    pointer-events: none;
-    /* Let clicks pass through if needed, though item is clickable */
+    align-items: flex-start;
+    justify-content: flex-end;
 }
 
 .picker-item-label {
-    position: relative !important;
-    /* Force override of any absolute positioning */
-    bottom: auto !important;
-    left: auto !important;
-    right: auto !important;
+    font-size: 15px;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.3px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     background: transparent !important;
-    /* Ensure no background */
+    position: static !important;
     box-shadow: none !important;
-    color: var(--color-text-primary);
-    font-size: 14px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    display: block;
-    width: 100%;
-    /* Ensure full width for text-align to work if needed */
     text-align: left;
-    /* Explicitly align left */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.2;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-    /* Cleaner shadow */
-    flex-shrink: 0;
-    /* Prevent shrinking */
+    margin: 0;
 }
 
 .picker-item-description {
-    position: relative !important;
-    color: var(--color-text-primary);
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.2px;
-    display: block;
-    width: 100%;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    margin-top: 4px;
+    line-height: 1.4;
     text-align: left;
-    /* Explicitly align left */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    opacity: 0.95;
-    line-height: 1.2;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    margin: 0 !important;
-    flex-shrink: 0;
 }
 
-.picker-item-check {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 24px;
-    height: 24px;
-    background: var(--color-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-primary-text);
+/* Scrollbar styling */
+.picker-grid-wrapper::-webkit-scrollbar {
+    width: 8px;
 }
 
-.picker-empty {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: var(--spacing-2xl);
-    color: var(--color-text-muted);
+.picker-grid-wrapper::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 4px;
 }
 
-/* Scrollbar for picker grid */
-.picker-grid::-webkit-scrollbar {
-    width: 6px;
+.picker-grid-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
 }
 
-.picker-grid::-webkit-scrollbar-track {
-    background: var(--color-surface);
-}
-
-.picker-grid::-webkit-scrollbar-thumb {
-    background: var(--color-border);
-    border-radius: 3px;
+.picker-grid-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.25);
 }

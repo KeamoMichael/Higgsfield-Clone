@@ -1,38 +1,63 @@
+/* Header with Glassmorphism */
+.app-header {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow:
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
 .header-brand {
     display: flex;
-    flex-direction: column;
-    gap: 0px;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
 .header-title {
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    /* Tighter, more modern tracking */
+    font-size: 18px;
+    font-weight: 800;
     color: var(--color-text-primary);
     margin: 0;
 }
 
 .header-title-accent {
     color: var(--color-text-primary);
-    /* Unified color */
-    font-weight: 400;
-    /* Contrast by weight instead of color */
     opacity: 0.6;
-}
-
-.header-tagline {
-    font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.5px;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    display: none;
-    /* Hide tagline for cleaner look */
 }
 
-.header-actions {
+.header-status {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-success);
+}
+
+.status-dot.disconnected {
+    background: var(--color-error);
+}
+
+.connect-btn {
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    color: var(--color-text-primary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.connect-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.15);
 }
