@@ -39,9 +39,121 @@ type PickerType =
     | null;
 
 function PromptBuilder({ data, onChange, view = 'all' }: PromptBuilderProps) {
-    /* ... state ... */
+    const [activePicker, setActivePicker] = useState<PickerType>(null);
 
-    /* ... helpers ... */
+    // Convert options to picker format (filter to only those with images)
+    const getPickerOptions = (options: typeof lightingSources): PickerOption[] => {
+        return options
+            .filter(opt => opt.image)
+            .map(opt => ({
+                value: opt.value,
+                label: opt.label,
+                image: opt.image!,
+                description: opt.description,
+            }));
+    };
+
+    // Get label for selected value
+    const getSelectedLabel = (options: typeof lightingSources, value: string): string => {
+        const opt = options.find(o => o.value === value);
+        return opt?.label || 'Select style...';
+    };
+
+    // Get image for selected value
+    const getSelectedImage = (options: typeof lightingSources, value: string): string | undefined => {
+        const opt = options.find(o => o.value === value);
+        return opt?.image;
+    };
+
+    const pickerConfigs = useMemo(() => ({
+        lightingSource: {
+            title: 'SELECT LIGHTING SOURCE',
+            subtitle: `// ${lightingSources.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(lightingSources),
+        },
+        atmosphere: {
+            title: 'SELECT ATMOSPHERE / MOOD',
+            subtitle: `// ${atmospheres.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(atmospheres),
+        },
+        cameraBody: {
+            title: 'SELECT CAMERA BODY',
+            subtitle: `// ${cameraBodies.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(cameraBodies),
+        },
+        focalLength: {
+            title: 'SELECT FOCAL LENGTH',
+            subtitle: `// ${focalLengths.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(focalLengths),
+        },
+        lensType: {
+            title: 'SELECT LENS TYPE',
+            subtitle: `// ${lensTypes.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(lensTypes),
+        },
+        filmStock: {
+            title: 'SELECT FILM STOCK',
+            subtitle: `// ${filmStocks.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(filmStocks),
+        },
+        photographyGenre: {
+            title: 'SELECT PHOTOGRAPHY GENRE',
+            subtitle: `// ${photographyGenres.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(photographyGenres),
+        },
+        photographerStyle: {
+            title: 'SELECT PHOTOGRAPHER STYLE',
+            subtitle: `// ${photographerStyles.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(photographerStyles),
+        },
+        movieLook: {
+            title: 'SELECT MOVIE LOOK / AESTHETIC',
+            subtitle: `// ${movieLooks.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(movieLooks),
+        },
+        filterEffect: {
+            title: 'SELECT FILTER / EFFECT',
+            subtitle: `// ${filterEffects.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(filterEffects),
+        },
+    }), []);
+
+    const renderVisualSelect = (
+        field: PickerType,
+        label: string,
+        options: typeof lightingSources,
+        value: string
+    ) => {
+        const selectedImage = getSelectedImage(options, value);
+        const selectedLabel = getSelectedLabel(options, value);
+
+        return (
+            <div className="form-group">
+                <label className="form-label">{label}</label>
+                <button
+                    type="button"
+                    className="visual-select-btn"
+                    onClick={() => setActivePicker(field)}
+                >
+                    {selectedImage ? (
+                        <img src={selectedImage} alt={selectedLabel} className="visual-select-thumb" />
+                    ) : (
+                        <div className="visual-select-placeholder">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <polyline points="21 15 16 10 5 21" />
+                            </svg>
+                        </div>
+                    )}
+                    <span className="visual-select-label">{selectedLabel}</span>
+                    <svg className="visual-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                </button>
+            </div>
+        );
+    };
 
     const showAll = view === 'all';
 
