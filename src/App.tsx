@@ -8,6 +8,7 @@ import ElementsTool from './components/ElementsTool';
 import FloatingDock from './components/FloatingDock';
 import InputModal from './components/InputModal';
 import SubjectForm from './components/SubjectForm';
+import { FilmIcon, LightIcon, CameraIcon, PaletteIcon, LayersIcon } from './components/DockIcons';
 import type { PromptData } from './services/promptBuilder';
 import { assemblePrompt, generateSceneJSON } from './services/promptBuilder';
 import type { GenerationResult } from './services/geminiService';
@@ -158,11 +159,11 @@ function App() {
 
   // Dock Items Configuration
   const dockItems = [
-    { id: 'subject', label: 'Subject', icon: <span>🎬</span> },
-    { id: 'lighting', label: 'Lighting', icon: <span>☀️</span> },
-    { id: 'camera', label: 'Camera', icon: <span>📷</span> },
-    { id: 'style', label: 'Style', icon: <span>🎨</span> },
-    { id: 'elements', label: 'Elements', icon: <span>🖼️</span> },
+    { id: 'subject', label: 'Subject', icon: <FilmIcon /> },
+    { id: 'lighting', label: 'Lighting', icon: <LightIcon /> },
+    { id: 'camera', label: 'Camera', icon: <CameraIcon /> },
+    { id: 'style', label: 'Style', icon: <PaletteIcon /> },
+    { id: 'elements', label: 'Elements', icon: <LayersIcon /> },
   ];
 
   return (
