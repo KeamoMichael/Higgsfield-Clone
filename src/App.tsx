@@ -5,11 +5,9 @@ import SettingsModal from './components/SettingsModal';
 import PromptBuilder from './components/PromptBuilder';
 import OutputPanel from './components/OutputPanel';
 import ElementsTool from './components/ElementsTool';
-import ElementsTool from './components/ElementsTool';
 import CommandBar from './components/CommandBar';
 import InputModal from './components/InputModal';
 import SubjectForm from './components/SubjectForm';
-import { FilmIcon, LightIcon, CameraIcon, PaletteIcon, LayersIcon } from './components/DockIcons';
 import type { PromptData } from './services/promptBuilder';
 import { assemblePrompt, generateSceneJSON } from './services/promptBuilder';
 import type { GenerationResult } from './services/geminiService';
@@ -158,15 +156,6 @@ function App() {
     addReferenceImage(newRef);
   }, [addReferenceImage]);
 
-  // Dock Items Configuration
-  const dockItems = [
-    { id: 'subject', label: 'Subject', icon: <FilmIcon /> },
-    { id: 'lighting', label: 'Lighting', icon: <LightIcon /> },
-    { id: 'camera', label: 'Camera', icon: <CameraIcon /> },
-    { id: 'style', label: 'Style', icon: <PaletteIcon /> },
-    { id: 'elements', label: 'Elements', icon: <LayersIcon /> },
-  ];
-
   return (
     <div className="app-layout">
       {/* 1. Header (Floating) */}
@@ -180,12 +169,6 @@ function App() {
         <div style={{ width: '100%', maxWidth: '1200px', height: '100%' }}>
           <OutputPanel
             prompt={assembledPrompt}
-            resolution={resolution}
-            onResolutionChange={setResolution}
-            onGenerate={handleGenerate}
-            onGenerateScene={handleGenerateScene}
-            onCopyPrompt={handleCopyPrompt}
-            onCopySceneJSON={handleCopySceneJSON}
             isGenerating={isGenerating}
             generatedImage={generatedImage}
             sceneVariations={sceneVariations}

@@ -3,12 +3,6 @@ import type { GenerationResult } from '../services/geminiService';
 
 interface OutputPanelProps {
     prompt: string;
-    resolution: string;
-    onResolutionChange: (res: string) => void;
-    onGenerate: () => void;
-    onGenerateScene: () => void;
-    onCopyPrompt: () => void;
-    onCopySceneJSON: () => void;
     isGenerating: boolean;
     generatedImage: string | null;
     sceneVariations: GenerationResult[];
@@ -19,12 +13,6 @@ interface OutputPanelProps {
 
 function OutputPanel({
     prompt,
-    resolution,
-    onResolutionChange,
-    onGenerate,
-    onGenerateScene,
-    onCopyPrompt,
-    onCopySceneJSON,
     isGenerating,
     generatedImage,
     sceneVariations,

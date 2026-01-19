@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import './CommandBar.css';
-import { FilmIcon, LightIcon, CameraIcon, PaletteIcon, LayersIcon } from './DockIcons';
 
 interface CommandBarProps {
     prompt: string;
