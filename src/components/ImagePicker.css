@@ -65,7 +65,7 @@
 .picker-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(120px, auto);
+    grid-auto-rows: minmax(160px, auto);
     gap: 16px;
     padding: 0 var(--spacing-lg) var(--spacing-lg);
     overflow-y: auto;
@@ -75,7 +75,7 @@
 .picker-item {
     position: relative;
     width: 100%;
-    height: 120px;
+    height: 160px;
     background: var(--color-surface-elevated);
     border: 2px solid transparent;
     border-radius: var(--radius-md);
@@ -109,8 +109,8 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: var(--spacing-md) var(--spacing-sm) var(--spacing-sm);
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    padding: var(--spacing-lg) var(--spacing-sm) var(--spacing-sm);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
 }
 
 .picker-item-label {
@@ -123,19 +123,21 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.3;
 }
 
 .picker-item-description {
     color: var(--color-text-secondary);
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 400;
     letter-spacing: 0.2px;
     display: block;
-    margin-top: 2px;
+    margin-top: 4px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    opacity: 0.8;
+    opacity: 0.85;
+    line-height: 1.2;
 }
 
 .picker-item-check {
