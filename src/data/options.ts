@@ -33,47 +33,43 @@ export const viewingDirections: SelectOption[] = [
   { value: 'profile', label: 'Profile View' },
 ];
 
-// Lighting Sources - with accurate representative images
+// Lighting Sources - with AI-generated accurate representative images
 export const lightingSources: SelectOption[] = [
-  { value: 'natural-light', label: 'Natural Light', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop', description: 'Soft daylight through window' },
-  { value: 'golden-hour', label: 'Golden Hour', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=300&fit=crop', description: 'Warm sunset lighting on face' },
-  { value: 'blue-hour', label: 'Blue Hour', image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=300&fit=crop', description: 'Cool twilight ambient light' },
-  { value: 'hard-lighting', label: 'Hard Lighting', image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=300&fit=crop', description: 'Sharp shadows, defined edges' },
-  { value: 'soft-lighting', label: 'Soft Lighting', image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=300&fit=crop', description: 'Diffused, gentle illumination' },
-  { value: 'volumetric-lighting', label: 'Volumetric Lighting', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', description: 'Light rays through atmosphere' },
-  { value: 'rim-lighting', label: 'Backlighting / Rim Light', image: 'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=400&h=300&fit=crop', description: 'Light from behind subject creating halo' },
-  { value: 'backlit', label: 'Silhouette', image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=300&fit=crop', description: 'Subject dark against bright background' },
-  { value: 'neon-glow', label: 'Neon Glow', image: 'https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&h=300&fit=crop', description: 'Colorful neon light on face' },
-  { value: 'chiaroscuro', label: 'Chiaroscuro Lighting', image: 'https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?w=400&h=300&fit=crop', description: 'Strong contrast of light and shadow' },
-  { value: 'high-key', label: 'High Key Lighting', image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=300&fit=crop', description: 'Bright, minimal shadows' },
-  { value: 'low-key', label: 'Low Key Lighting', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=300&fit=crop', description: 'Dark, dramatic shadows' },
-  { value: 'broad-lighting', label: 'Broad Lighting', image: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?w=400&h=300&fit=crop', description: 'Light on wider side of face' },
-  { value: 'short-lighting', label: 'Short Lighting', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', description: 'Light on narrow side of face' },
-  { value: 'candlelight', label: 'Candlelight', image: 'https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?w=400&h=300&fit=crop', description: 'Warm flickering flame light' },
-  { value: 'moonlight', label: 'Moonlight', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', description: 'Cool blue night illumination' },
-  { value: 'color-gels', label: 'Color Gels', image: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&h=300&fit=crop', description: 'Colored light filters for effect' },
-  { value: 'gobo-lighting', label: 'Gobo Lighting', image: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&h=300&fit=crop', description: 'Patterned shadows through blinds' },
+  { value: 'natural-light', label: 'Natural Light', image: '/presets/lighting_natural_1768790047365.png', description: 'Soft daylight through window' },
+  { value: 'golden-hour', label: 'Golden Hour', image: '/presets/lighting_golden_hour_1768789903761.png', description: 'Warm sunset lighting' },
+  { value: 'blue-hour', label: 'Blue Hour', image: '/presets/lighting_blue_hour_1768790065890.png', description: 'Cool twilight ambient light' },
+  { value: 'hard-lighting', label: 'Hard Lighting', image: '/presets/lighting_hard_1768789951425.png', description: 'Sharp shadows, defined edges' },
+  { value: 'soft-lighting', label: 'Soft Lighting', image: '/presets/lighting_soft_1768789967300.png', description: 'Diffused, gentle illumination' },
+  { value: 'volumetric-lighting', label: 'Volumetric Lighting', image: '/presets/lighting_volumetric_1768790084644.png', description: 'Light rays through atmosphere' },
+  { value: 'rim-lighting', label: 'Backlighting / Rim Light', image: '/presets/lighting_rim_backlight_1768789868946.png', description: 'Light from behind creating halo' },
+  { value: 'backlit', label: 'Silhouette', image: '/presets/lighting_silhouette_1768790100706.png', description: 'Subject dark against bright background' },
+  { value: 'neon-glow', label: 'Neon Glow', image: '/presets/lighting_neon_1768790001421.png', description: 'Colorful neon light on face' },
+  { value: 'chiaroscuro', label: 'Chiaroscuro Lighting', image: '/presets/lighting_chiaroscuro_1768789887186.png', description: 'Strong contrast of light and shadow' },
+  { value: 'high-key', label: 'High Key Lighting', image: '/presets/lighting_high_key_1768790151438.png', description: 'Bright, minimal shadows' },
+  { value: 'low-key', label: 'Low Key Lighting', image: '/presets/lighting_low_key_1768790169386.png', description: 'Dark, dramatic shadows' },
+  { value: 'broad-lighting', label: 'Broad Lighting', image: '/presets/lighting_broad_1768790194541.png', description: 'Light on wider side of face' },
+  { value: 'candlelight', label: 'Candlelight', image: '/presets/lighting_candlelight_1768789984067.png', description: 'Warm flickering flame light' },
+  { value: 'gobo-lighting', label: 'Gobo Lighting', image: '/presets/lighting_gobo_1768790215423.png', description: 'Patterned shadows through blinds' },
 ];
 
-// Atmosphere/Mood - with accurate representative images
+// Atmosphere/Mood - with AI-generated representative images
 export const atmospheres: SelectOption[] = [
-  { value: 'cinematic', label: 'Cinematic', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop' },
-  { value: 'moody', label: 'Moody', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=300&fit=crop' },
-  { value: 'dramatic', label: 'Dramatic', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=300&fit=crop' },
+  { value: 'cinematic', label: 'Cinematic', image: '/presets/mood_cinematic_1768790647345.png' },
+  { value: 'moody', label: 'Moody', image: '/presets/mood_moody_1768790663309.png' },
+  { value: 'dramatic', label: 'Dramatic', image: '/presets/mood_dramatic_1768790682076.png' },
+  { value: 'nostalgic', label: 'Nostalgic', image: '/presets/mood_nostalgic_1768790752920.png' },
+  { value: 'ethereal', label: 'Ethereal', image: '/presets/mood_ethereal_1768790701003.png' },
+  { value: 'mysterious', label: 'Mysterious', image: '/presets/mood_mysterious_1768790783511.png' },
   { value: 'melancholic', label: 'Melancholic', image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=300&fit=crop' },
-  { value: 'nostalgic', label: 'Nostalgic', image: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=400&h=300&fit=crop' },
-  { value: 'ethereal', label: 'Ethereal', image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=300&fit=crop' },
   { value: 'gritty', label: 'Gritty', image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=300&fit=crop' },
   { value: 'serene', label: 'Serene', image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=300&fit=crop' },
   { value: 'tense', label: 'Tense', image: 'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?w=400&h=300&fit=crop' },
-  { value: 'mysterious', label: 'Mysterious', image: 'https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?w=400&h=300&fit=crop' },
   { value: 'ominous', label: 'Ominous', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=300&fit=crop' },
   { value: 'hopeful', label: 'Hopeful', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=300&fit=crop' },
   { value: 'lonely', label: 'Lonely', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=300&fit=crop' },
   { value: 'romantic', label: 'Romantic', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop' },
   { value: 'dark', label: 'Dark and Brooding', image: 'https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?w=400&h=300&fit=crop' },
   { value: 'whimsical', label: 'Whimsical', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=300&fit=crop' },
-  { value: 'dingy', label: 'Dingy and Depressing', image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=300&fit=crop' },
 ];
 
 // Camera Bodies - with images showing footage/style characteristic of each camera
