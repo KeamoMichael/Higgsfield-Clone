@@ -109,15 +109,22 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 55px var(--spacing-sm) 18px;
+    padding: 55px 12px 18px;
     background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.95) 100%);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     gap: 4px;
+    pointer-events: none;
+    /* Let clicks pass through if needed, though item is clickable */
 }
 
 .picker-item-label {
+    position: relative !important;
+    /* Force override of any absolute positioning */
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
     color: var(--color-text-primary);
     font-size: 14px;
     font-weight: 800;
@@ -129,9 +136,12 @@
     text-overflow: ellipsis;
     line-height: 1.2;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
+    /* Prevent shrinking */
 }
 
 .picker-item-description {
+    position: relative !important;
     color: var(--color-text-primary);
     font-size: 13px;
     font-weight: 500;
@@ -143,7 +153,8 @@
     opacity: 0.95;
     line-height: 1.2;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    margin: 0;
+    margin: 0 !important;
+    flex-shrink: 0;
 }
 
 .picker-item-check {
