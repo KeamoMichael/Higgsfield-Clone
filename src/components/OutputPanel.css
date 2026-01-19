@@ -36,13 +36,18 @@
 
 .output-area {
     background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    /* White canvas */
+    border: none;
+    /* No border for clean look */
+    box-shadow: var(--shadow-md);
+    /* Soft lift */
     border-radius: var(--radius-lg);
     min-height: 350px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    margin-bottom: var(--spacing-lg);
 }
 
 .output-placeholder {

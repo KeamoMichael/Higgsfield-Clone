@@ -1,13 +1,57 @@
+/* Image Picker Modal - lightbox style (Dark Theme Override) */
 .picker-modal {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    /* Define local dark theme variables */
+    --local-bg: #111111;
+    --local-surface: #1a1a1a;
+    --local-border: #333333;
+    --local-text: #ffffff;
+    --local-text-muted: #888888;
+
+    background: var(--local-bg);
+    border: 1px solid var(--local-border);
     border-radius: var(--radius-xl);
     min-width: 750px;
     max-width: 900px;
     max-height: 85vh;
     display: flex;
     flex-direction: column;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    /* Deep shadow */
+    color: var(--local-text);
+}
+
+.picker-modal .picker-title {
+    color: var(--local-text);
+}
+
+.picker-modal .picker-subtitle {
+    color: var(--local-text-muted);
+}
+
+.picker-modal .picker-header {
+    border-bottom-color: var(--local-border);
+}
+
+.picker-modal .search-input {
+    background: var(--local-surface);
+    border-color: var(--local-border);
+    color: var(--local-text);
+}
+
+.picker-modal .picker-item {
+    background: var(--local-surface);
+}
+
+.picker-modal .picker-item:hover {
+    border-color: #555;
+}
+
+.picker-modal ::-webkit-scrollbar-thumb {
+    background: #444;
+}
+
+.picker-modal ::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .picker-header {
