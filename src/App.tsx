@@ -124,7 +124,7 @@ function App() {
   }, [addReferenceImage]);
 
   return (
-    <div className="app-layout">
+    <div className="relative h-screen bg-[#050505] flex flex-col overflow-hidden text-white">
       {/* 1. Header (Floating) */}
       <Header
         isConnected={apiConnected}
@@ -132,8 +132,8 @@ function App() {
       />
 
       {/* 2. Main Canvas Area */}
-      <main className="canvas-area">
-        <div style={{ width: '100%', maxWidth: '1200px', height: '100%' }}>
+      <main className="flex-1 flex flex-col w-full relative z-10 pt-20 pb-48 overflow-y-auto">
+        <div className="w-full max-w-7xl mx-auto h-full flex items-center justify-center">
           <OutputPanel
             prompt={assembledPrompt}
             isGenerating={isGenerating}
@@ -145,67 +145,104 @@ function App() {
         </div>
       </main>
 
-      {/* 3. Command Bar (Replaces Floating Dock) */}
+      {/* 3. Command Bar */}
       <CommandBar
         prompt={promptData.subjectAction}
-        onPromptChange={(val) => updatePromptData('subjectAction', val)}
+        onPromptChange={onPromptChange}
         onGenerate={handleGenerate}
         isGenerating={isGenerating}
         activeTool={activeTool}
-        onToggleTool={(tool) => setActiveTool(activeTool === tool ? null : tool)}
+        onToggleTool={handleToggleTool}
         resolution={resolution}
         onResolutionChange={setResolution}
+        aspectRatio={aspectRatio}
+        onAspectRatioChange={setAspectRatio}
       />
 
-      {/* 4. Tool Modals */}
+      {/* 4. Modals */}
       <InputModal
         isOpen={activeTool === 'subject'}
         onClose={() => setActiveTool(null)}
         title="Subject & Framing"
-        icon="🎬"
+        icon={<FilmIcon />}
       >
-        <SubjectForm data={promptData} onChange={updatePromptData} />
+        <SubjectForm
+          data={promptData}
+          onChange={setPromptData}
+        />
       </InputModal>
 
       <InputModal
         isOpen={activeTool === 'lighting'}
         onClose={() => setActiveTool(null)}
-        title="Lighting & Mood"
-        icon="☀️"
+        title="Lighting & Atmosphere"
+        icon={<LightIcon />}
       >
-        <PromptBuilder data={promptData} onChange={updatePromptData} view="lighting" />
+        <PromptBuilder
+          data={promptData}
+          onChange={setPromptData}
+          view="lighting"
+          activePicker={activePicker}
+          onOpenPicker={setActivePicker}
+        />
       </InputModal>
 
       <InputModal
         isOpen={activeTool === 'camera'}
         onClose={() => setActiveTool(null)}
         title="Camera Gear"
-        icon="📷"
+        icon={<CameraIcon />}
       >
-        <PromptBuilder data={promptData} onChange={updatePromptData} view="camera" />
+        <PromptBuilder
+          data={promptData}
+          onChange={setPromptData}
+          view="camera"
+          activePicker={activePicker}
+          onOpenPicker={setActivePicker}
+        />
       </InputModal>
 
       <InputModal
         isOpen={activeTool === 'style'}
         onClose={() => setActiveTool(null)}
         title="Style & Aesthetics"
-        icon="🎨"
+        icon={<PaletteIcon />}
       >
-        <PromptBuilder data={promptData} onChange={updatePromptData} view="style" />
+        <PromptBuilder
+          data={promptData}
+          onChange={setPromptData}
+          view="style"
+          activePicker={activePicker}
+          onOpenPicker={setActivePicker}
+        />
       </InputModal>
 
+      {/* Elements Tool (Reference Image) - Special Modal */}
       <InputModal
         isOpen={activeTool === 'elements'}
         onClose={() => setActiveTool(null)}
-        title="Reference Elements"
-        icon="🖼️"
+        title="Elements & References"
+        icon={<LayersIcon />}
       >
         <ElementsTool
           referenceImages={referenceImages}
-          onAdd={addReferenceImage}
-          onRemove={removeReferenceImage}
+          onAddImage={addReferenceImage}
+          onRemoveImage={removeReferenceImage}
         />
       </InputModal>
+
+      {/* Image Picker Global Modal */}
+      {activePicker && (
+        <ImagePicker
+          config={pickerConfigs[activePicker]}
+          onSelect={(val) => {
+            setPromptData(prev => ({ ...prev, [activePicker]: val }));
+            setActivePicker(null);
+          }}
+          onClose={() => setActivePicker(null)}
+          selectedValue={promptData[activePicker] as string}
+        />
+      )}
 
       {/* Settings Modal */}
       {showSettings && (
@@ -217,8 +254,8 @@ function App() {
       )}
 
       {/* Decorative Ambient Lighting */}
-      <div className="ambient-glow-top"></div>
-      <div className="ambient-glow-bottom"></div>
+      <div className="fixed top-[-20%] left-[-10%] w-[60%] h-[60%] bg-[#c7ff00]/5 rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none z-0" />
     </div>
   );
 }
