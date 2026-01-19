@@ -206,3 +206,143 @@ function App() {
 }
 
 export default App;
+
+/* ... imports remain same ... */
+
+function App() {
+  const [promptData, setPromptData] = useState<PromptData>(initialPromptData);
+  const [showSettings, setShowSettings] = useState(false);
+  const [apiConnected, setApiConnected] = useState(false);
+  const [resolution, setResolution] = useState('1k');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedImage, setGeneratedImage] = useState<string | null>(null);
+  const [sceneVariations, setSceneVariations] = useState<GenerationResult[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [referenceImages, setReferenceImages] = useState<ReferenceImage[]>([]);
+
+  // NEW: Modal State
+  const [activeTool, setActiveTool] = useState<string | null>(null);
+
+  /* ... hooks (assembledPrompt, etc) remain same ... */
+
+  /* ... handlers (handleGenerate, etc) remain same ... */
+
+  // Dock Items Configuration
+  const dockItems = [
+    { id: 'subject', label: 'Subject', icon: <span>🎬</span> },
+    { id: 'lighting', label: 'Lighting', icon: <span>☀️</span> },
+    { id: 'camera', label: 'Camera', icon: <span>📷</span> },
+    { id: 'style', label: 'Style', icon: <span>🎨</span> },
+    { id: 'elements', label: 'Elements', icon: <span>🖼️</span> },
+  ];
+
+  return (
+    <div className="app-layout">
+      {/* 1. Header (Floating) */}
+      <Header
+        isConnected={apiConnected}
+        onConnectClick={() => setShowSettings(true)}
+      />
+
+      {/* 2. Main Canvas Area (Reference OutputPanel directly, adapted style in CSS) */}
+      <main className="canvas-area">
+        <div style={{ width: '100%', maxWidth: '1200px', height: '100%' }}>
+          <OutputPanel
+            prompt={assembledPrompt}
+            resolution={resolution}
+            onResolutionChange={setResolution}
+            onGenerate={handleGenerate}
+            onGenerateScene={handleGenerateScene}
+            onCopyPrompt={handleCopyPrompt}
+            onCopySceneJSON={handleCopySceneJSON}
+            isGenerating={isGenerating}
+            generatedImage={generatedImage}
+            sceneVariations={sceneVariations}
+            error={error}
+            apiConnected={apiConnected}
+            onUseAsReference={handleUseAsReference}
+          />
+        </div>
+      </main>
+
+      {/* 3. Floating Dock */}
+      <FloatingDock
+        items={dockItems}
+        activeId={activeTool}
+        onSelect={setActiveTool}
+      />
+
+      {/* 4. Tool Modals */}
+
+      {/* Subject Modal */}
+      <InputModal
+        isOpen={activeTool === 'subject'}
+        onClose={() => setActiveTool(null)}
+        title="Subject & Framing"
+        icon="🎬"
+      >
+        <SubjectForm data={promptData} onChange={updatePromptData} />
+      </InputModal>
+
+      {/* Lighting Modal (Reusing bits of PromptBuilder logic or extracting?) */}
+      {/* For now, we can render a subset of PromptBuilder if we pass a 'section' prop, 
+          OR we can just render the specific pickers here. 
+          Let's render a Clean wrapper that uses PromptBuilder's components.
+          Actually, let's just use PromptBuilder but tell it to ONLY render specific sections.
+          Wait, PromptBuilder is big. Let's make a new 'SectionRenderer' or just modify PromptBuilder to take a 'view' prop.
+      */}
+      <InputModal
+        isOpen={activeTool === 'lighting'}
+        onClose={() => setActiveTool(null)}
+        title="Lighting & Mood"
+        icon="☀️"
+      >
+        <PromptBuilder
+          data={promptData}
+          onChange={updatePromptData}
+          view="lighting" /* Needs this prop added to PromptBuilder */
+        />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'camera'}
+        onClose={() => setActiveTool(null)}
+        title="Camera Gear"
+        icon="📷"
+      >
+        <PromptBuilder data={promptData} onChange={updatePromptData} view="camera" />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'style'}
+        onClose={() => setActiveTool(null)}
+        title="Style & Aesthetics"
+        icon="🎨"
+      >
+        <PromptBuilder data={promptData} onChange={updatePromptData} view="style" />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'elements'}
+        onClose={() => setActiveTool(null)}
+        title="Reference Elements"
+        icon="🖼️"
+      >
+        <ElementsTool
+          referenceImages={referenceImages}
+          onAdd={addReferenceImage}
+          onRemove={removeReferenceImage}
+        />
+      </InputModal>
+
+      {/* Settings Modal */}
+      {showSettings && (
+        <SettingsModal
+          onClose={() => setShowSettings(false)}
+          onSave={handleSaveApiKey}
+          currentKey={hasApiKey() ? '••••••••••••••••••••' : ''}
+        />
+      )}
+    </div>
+  );
+}

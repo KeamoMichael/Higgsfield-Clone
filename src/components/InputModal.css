@@ -1,0 +1,108 @@
+.input-modal-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    /* Let clicks pass through when hidden */
+    z-index: 900;
+    display: flex;
+    align-items: flex-end;
+    /* Show at bottom initially? Or center? Let's center for now */
+    justify-content: center;
+    padding-bottom: 120px;
+    /* Space for dock */
+}
+
+.input-modal-overlay.visible {
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.2);
+    /* Slight dim */
+    backdrop-filter: blur(2px);
+}
+
+.input-modal-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 24px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 70vh;
+    box-shadow:
+        0 20px 50px -10px rgba(0, 0, 0, 0.15),
+        0 10px 20px -5px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.3, 1.2, 0.4, 1);
+    /* Bouncy pop */
+    overflow: hidden;
+}
+
+.input-modal-card.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.input-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.input-modal-title-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.input-modal-icon {
+    font-size: 20px;
+}
+
+.input-modal-title {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--color-text-primary);
+}
+
+.input-modal-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-surface-elevated);
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.input-modal-close:hover {
+    background: var(--color-border);
+    color: var(--color-primary);
+}
+
+.input-modal-content {
+    padding: 24px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+/* Scrollbar tweaks for modal content */
+.input-modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.input-modal-content::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 3px;
+}
