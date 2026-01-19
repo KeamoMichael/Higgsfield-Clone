@@ -97,30 +97,30 @@ export const cameraBodies: SelectOption[] = [
   { value: 'vhs-camera', label: 'VHS Camera', image: 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=400&h=300&fit=crop', description: 'Retro video look' },
 ];
 
-// Focal Lengths
+// Focal Lengths - with representative images
 export const focalLengths: SelectOption[] = [
-  { value: '14mm', label: '14mm Ultra Wide' },
-  { value: '24mm', label: '24mm Wide Angle' },
-  { value: '35mm', label: '35mm Standard' },
-  { value: '50mm', label: '50mm Normal' },
-  { value: '85mm', label: '85mm Portrait' },
-  { value: '100mm', label: '100mm Macro' },
-  { value: '135mm', label: '135mm Telephoto' },
-  { value: '200mm', label: '200mm Long Telephoto' },
+  { value: '14mm', label: '14mm Ultra Wide', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', description: 'Dramatic perspective, wide view' },
+  { value: '24mm', label: '24mm Wide Angle', image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop', description: 'Environmental portraits, architecture' },
+  { value: '35mm', label: '35mm Standard', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop', description: 'Natural perspective, cinema standard' },
+  { value: '50mm', label: '50mm Normal', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop', description: 'Human eye perspective' },
+  { value: '85mm', label: '85mm Portrait', image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=300&fit=crop', description: 'Classic portrait compression' },
+  { value: '100mm', label: '100mm Macro', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop', description: 'Detail and close-up work' },
+  { value: '135mm', label: '135mm Telephoto', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=300&fit=crop', description: 'Compressed bokeh portraits' },
+  { value: '200mm', label: '200mm Long Telephoto', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', description: 'Maximum background compression' },
 ];
 
-// Lens Types
+// Lens Types - with representative images
 export const lensTypes: SelectOption[] = [
-  { value: 'prime', label: 'Prime Lens' },
-  { value: 'anamorphic', label: 'Anamorphic Lens' },
-  { value: 'wide-angle', label: 'Wide Angle Lens' },
-  { value: 'telephoto', label: 'Telephoto Lens' },
-  { value: 'macro', label: 'Macro Lens' },
-  { value: 'tilt-shift', label: 'Tilt-Shift Lens' },
-  { value: 'fisheye', label: 'Fisheye Lens' },
-  { value: 'vintage', label: 'Vintage Lens' },
-  { value: 'zeiss-master', label: 'Zeiss Master Prime' },
-  { value: 'cooke-s4', label: 'Cooke S4' },
+  { value: 'prime', label: 'Prime Lens', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop', description: 'Sharp, fast aperture' },
+  { value: 'anamorphic', label: 'Anamorphic Lens', image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop', description: 'Oval bokeh, horizontal flares' },
+  { value: 'wide-angle', label: 'Wide Angle Lens', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', description: 'Expanded field of view' },
+  { value: 'telephoto', label: 'Telephoto Lens', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', description: 'Compressed perspective' },
+  { value: 'macro', label: 'Macro Lens', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop', description: 'Extreme close-up detail' },
+  { value: 'tilt-shift', label: 'Tilt-Shift Lens', image: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&h=300&fit=crop', description: 'Selective focus, miniature effect' },
+  { value: 'fisheye', label: 'Fisheye Lens', image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop', description: '180° distorted view' },
+  { value: 'vintage', label: 'Vintage Lens', image: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=400&h=300&fit=crop', description: 'Soft, character, flares' },
+  { value: 'zeiss-master', label: 'Zeiss Master Prime', image: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=300&fit=crop', description: 'Clinical sharpness' },
+  { value: 'cooke-s4', label: 'Cooke S4', image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400&h=300&fit=crop', description: 'Warm, rounded look' },
 ];
 
 // Film Stocks - with images showing color/grain characteristics
@@ -193,33 +193,37 @@ export const movieLooks: SelectOption[] = [
   { value: 'film-noir', label: 'Film Noir', image: 'https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?w=400&h=300&fit=crop', description: 'Classic B&W shadows' },
 ];
 
-// Filters/Effects
+// Filters/Effects - with representative images
 export const filterEffects: SelectOption[] = [
-  { value: 'none', label: 'No Filter' },
-  { value: 'film-grain', label: 'Film Grain' },
-  { value: 'heavy-grain', label: 'Heavy Film Grain' },
-  { value: 'vignette', label: 'Vignette' },
-  { value: 'motion-blur', label: 'Motion Blur' },
-  { value: 'lens-flare', label: 'Lens Flare' },
-  { value: 'chromatic-aberration', label: 'Chromatic Aberration' },
-  { value: 'halation', label: 'Halation' },
-  { value: 'light-leak', label: 'Light Leak' },
-  { value: 'desaturated', label: 'Desaturated' },
-  { value: 'cross-processed', label: 'Cross Processed' },
-  { value: 'underexposed', label: 'Underexposed' },
-  { value: 'overexposed', label: 'Overexposed' },
-  { value: 'teal-orange', label: 'Teal & Orange Grade' },
-  { value: 'bleach-bypass', label: 'Bleach Bypass' },
+  { value: 'none', label: 'No Filter', image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop', description: 'Clean, unprocessed look' },
+  { value: 'film-grain', label: 'Film Grain', image: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=400&h=300&fit=crop', description: 'Subtle analog texture' },
+  { value: 'heavy-grain', label: 'Heavy Film Grain', image: 'https://images.unsplash.com/photo-1460134846237-51c777df6111?w=400&h=300&fit=crop', description: 'Gritty, high ISO look' },
+  { value: 'vignette', label: 'Vignette', image: 'https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?w=400&h=300&fit=crop', description: 'Dark edges, center focus' },
+  { value: 'motion-blur', label: 'Motion Blur', image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop', description: 'Movement and speed' },
+  { value: 'lens-flare', label: 'Lens Flare', image: 'https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=400&h=300&fit=crop', description: 'Sun and light artifacts' },
+  { value: 'chromatic-aberration', label: 'Chromatic Aberration', image: 'https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&h=300&fit=crop', description: 'Color fringing, vintage' },
+  { value: 'halation', label: 'Halation', image: 'https://images.unsplash.com/photo-1557683316-973673baf926?w=400&h=300&fit=crop', description: 'Glow around highlights' },
+  { value: 'light-leak', label: 'Light Leak', image: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=400&h=300&fit=crop', description: 'Warm light intrusion' },
+  { value: 'desaturated', label: 'Desaturated', image: 'https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?w=400&h=300&fit=crop', description: 'Muted, faded colors' },
+  { value: 'cross-processed', label: 'Cross Processed', image: 'https://images.unsplash.com/photo-1549490349-8643362247b5?w=400&h=300&fit=crop', description: 'Shifted colors, 90s look' },
+  { value: 'teal-orange', label: 'Teal & Orange Grade', image: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop', description: 'Hollywood color grade' },
+  { value: 'bleach-bypass', label: 'Bleach Bypass', image: 'https://images.unsplash.com/photo-1492011221367-f47e3ccd77a0?w=400&h=300&fit=crop', description: 'Desaturated, high contrast' },
 ];
 
-// Aspect Ratios
+// Aspect Ratios - expanded list
 export const aspectRatios: SelectOption[] = [
-  { value: '16:9', label: '16:9 (Widescreen)' },
-  { value: '2.39:1', label: '2.39:1 (Anamorphic)' },
+  { value: 'auto', label: 'Auto' },
   { value: '1:1', label: '1:1 (Square)' },
-  { value: '4:3', label: '4:3 (Classic)' },
   { value: '9:16', label: '9:16 (Vertical)' },
+  { value: '16:9', label: '16:9 (Widescreen)' },
+  { value: '3:4', label: '3:4 (Portrait)' },
+  { value: '4:3', label: '4:3 (Classic)' },
+  { value: '3:2', label: '3:2 (35mm Film)' },
+  { value: '2:3', label: '2:3 (Portrait Film)' },
+  { value: '5:4', label: '5:4 (Large Format)' },
+  { value: '4:5', label: '4:5 (Portrait Large Format)' },
   { value: '21:9', label: '21:9 (Ultrawide)' },
+  { value: '2.39:1', label: '2.39:1 (Anamorphic Cinema)' },
 ];
 
 // Resolution options

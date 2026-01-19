@@ -28,10 +28,13 @@ type PickerType =
     | 'lightingSource'
     | 'atmosphere'
     | 'cameraBody'
+    | 'focalLength'
+    | 'lensType'
     | 'filmStock'
     | 'photographyGenre'
     | 'photographerStyle'
     | 'movieLook'
+    | 'filterEffect'
     | null;
 
 function PromptBuilder({ data, onChange }: PromptBuilderProps) {
@@ -76,6 +79,16 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
             subtitle: `// ${cameraBodies.filter(o => o.image).length} OPTIONS AVAILABLE`,
             options: getPickerOptions(cameraBodies),
         },
+        focalLength: {
+            title: 'SELECT FOCAL LENGTH',
+            subtitle: `// ${focalLengths.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(focalLengths),
+        },
+        lensType: {
+            title: 'SELECT LENS TYPE',
+            subtitle: `// ${lensTypes.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(lensTypes),
+        },
         filmStock: {
             title: 'SELECT FILM STOCK',
             subtitle: `// ${filmStocks.filter(o => o.image).length} OPTIONS AVAILABLE`,
@@ -95,6 +108,11 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
             title: 'SELECT MOVIE LOOK / AESTHETIC',
             subtitle: `// ${movieLooks.filter(o => o.image).length} OPTIONS AVAILABLE`,
             options: getPickerOptions(movieLooks),
+        },
+        filterEffect: {
+            title: 'SELECT FILTER / EFFECT',
+            subtitle: `// ${filterEffects.filter(o => o.image).length} OPTIONS AVAILABLE`,
+            options: getPickerOptions(filterEffects),
         },
     }), []);
 
@@ -214,39 +232,14 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
                     <h2 className="section-title">03. CAMERA GEAR</h2>
                 </div>
 
-                <div className="form-grid">
-                    <div className="form-group form-grid-full">
-                        {renderVisualSelect('cameraBody', 'CAMERA BODY', cameraBodies, data.cameraBody)}
-                    </div>
-                </div>
+                {renderVisualSelect('cameraBody', 'CAMERA BODY', cameraBodies, data.cameraBody)}
 
                 <div className="form-grid">
                     <div className="form-group">
-                        <label className="form-label">FOCAL LENGTH</label>
-                        <select
-                            className="form-select"
-                            value={data.focalLength}
-                            onChange={e => onChange('focalLength', e.target.value)}
-                        >
-                            <option value="">Select style...</option>
-                            {focalLengths.map(opt => (
-                                <option key={opt.value} value={opt.value}>{opt.label}</option>
-                            ))}
-                        </select>
+                        {renderVisualSelect('focalLength', 'FOCAL LENGTH', focalLengths, data.focalLength)}
                     </div>
-
                     <div className="form-group">
-                        <label className="form-label">LENS TYPE</label>
-                        <select
-                            className="form-select"
-                            value={data.lensType}
-                            onChange={e => onChange('lensType', e.target.value)}
-                        >
-                            <option value="">Select style...</option>
-                            {lensTypes.map(opt => (
-                                <option key={opt.value} value={opt.value}>{opt.label}</option>
-                            ))}
-                        </select>
+                        {renderVisualSelect('lensType', 'LENS TYPE', lensTypes, data.lensType)}
                     </div>
                 </div>
 
@@ -263,20 +256,7 @@ function PromptBuilder({ data, onChange }: PromptBuilderProps) {
                 {renderVisualSelect('photographyGenre', 'PHOTOGRAPHY GENRE', photographyGenres, data.photographyGenre)}
                 {renderVisualSelect('photographerStyle', 'PHOTOGRAPHER STYLE', photographerStyles, data.photographerStyle)}
                 {renderVisualSelect('movieLook', 'MOVIE LOOK / AESTHETIC', movieLooks, data.movieLook)}
-
-                <div className="form-group">
-                    <label className="form-label">FILTER / EFFECT</label>
-                    <select
-                        className="form-select"
-                        value={data.filterEffect}
-                        onChange={e => onChange('filterEffect', e.target.value)}
-                    >
-                        <option value="">Select effect...</option>
-                        {filterEffects.map(opt => (
-                            <option key={opt.value} value={opt.value}>{opt.label}</option>
-                        ))}
-                    </select>
-                </div>
+                {renderVisualSelect('filterEffect', 'FILTER / EFFECT', filterEffects, data.filterEffect)}
 
                 <div className="form-group">
                     <label className="form-label">ASPECT RATIO</label>
