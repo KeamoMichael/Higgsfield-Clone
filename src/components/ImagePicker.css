@@ -126,29 +126,23 @@
     left: 0;
     right: 0;
     background: linear-gradient(to top,
-            rgba(0, 0, 0, 0.7) 0%,
-            rgba(0, 0, 0, 0.5) 50%,
-            transparent 100%);
-    padding: 16px;
-    padding-top: 60px;
+            rgba(0, 0, 0, 0.8) 0%,
+            rgba(0, 0, 0, 0.6) 40%,
+            rgba(0, 0, 0, 0) 100%);
+    padding: 20px 16px 16px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    align-items: flex-start;
     justify-content: flex-end;
+    pointer-events: none;
 }
 
 .picker-item-label {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     color: #FFFFFF;
-    letter-spacing: 0.3px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    background: transparent !important;
-    position: static !important;
-    box-shadow: none !important;
-    text-align: left;
-    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
 }
 
 .picker-item-description {

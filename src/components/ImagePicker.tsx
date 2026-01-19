@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import './ImagePicker.css';
 
 export interface PickerOption {
@@ -41,7 +42,7 @@ function ImagePicker({
         onClose();
     };
 
-    return (
+    return createPortal(
         <div className="modal-overlay" onClick={onClose}>
             <div className="picker-modal" onClick={e => e.stopPropagation()}>
                 <div className="picker-header">
@@ -73,29 +74,31 @@ function ImagePicker({
                     </div>
                 </div>
 
-                <div className="picker-grid">
-                    {filteredOptions.map(option => (
-                        <div
-                            key={option.value}
-                            className={`picker-item ${selectedValue === option.value ? 'selected' : ''}`}
-                            onClick={() => handleSelect(option.value)}
-                        >
-                            <img src={option.image} alt={option.label} loading="lazy" />
-                            <div className="picker-item-overlay">
-                                <span className="picker-item-label">{option.label}</span>
-                                {option.description && (
-                                    <span className="picker-item-description">{option.description}</span>
+                <div className="picker-grid-wrapper">
+                    <div className="picker-grid">
+                        {filteredOptions.map(option => (
+                            <div
+                                key={option.value}
+                                className={`picker-item ${selectedValue === option.value ? 'selected' : ''}`}
+                                onClick={() => handleSelect(option.value)}
+                            >
+                                <img src={option.image} alt={option.label} loading="lazy" className="picker-item-image" />
+                                <div className="picker-item-overlay">
+                                    <span className="picker-item-label">{option.label}</span>
+                                    {option.description && (
+                                        <span className="picker-item-description">{option.description}</span>
+                                    )}
+                                </div>
+                                {selectedValue === option.value && (
+                                    <div className="picker-item-check">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                                            <polyline points="20 6 9 17 4 12" />
+                                        </svg>
+                                    </div>
                                 )}
                             </div>
-                            {selectedValue === option.value && (
-                                <div className="picker-item-check">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                                        <polyline points="20 6 9 17 4 12" />
-                                    </svg>
-                                </div>
-                            )}
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                     {filteredOptions.length === 0 && (
                         <div className="picker-empty">
                             <span>No options match your search</span>
@@ -103,7 +106,8 @@ function ImagePicker({
                     )}
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 }
 
