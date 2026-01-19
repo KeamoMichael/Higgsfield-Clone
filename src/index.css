@@ -9,28 +9,29 @@
   --color-surface-hover: #F0FDF4;
   /* Very subtle tint or just Gray-50 */
 
-  --color-border: #E5E7EB;
-  /* Gray-200 - Subtle borders */
-  --color-border-light: #F3F4F6;
-  /* Gray-100 */
-  --color-border-hover: #D1D5DB;
-  /* Gray-300 */
+  --color-border: #D1D5DB;
+  /* Gray-300 - Darker for visibility */
+  --color-border-light: #E5E7EB;
+  /* Gray-200 */
+  --color-border-hover: #9CA3AF;
+  /* Gray-400 */
 
   /* Primary Accent - Bold Black */
   --color-primary: #000000;
   --color-primary-hover: #333333;
-  --color-primary-muted: rgba(0, 0, 0, 0.05);
+  --color-primary-muted: rgba(0, 0, 0, 0.08);
+  /* Stronger mute */
   --color-primary-text: #FFFFFF;
 
   /* Text Colors */
   --color-text-primary: #111827;
   /* Gray-900 - Almost Black */
-  --color-text-secondary: #6B7280;
-  /* Gray-500 - Soft Text */
-  --color-text-muted: #9CA3AF;
-  /* Gray-400 */
-  --color-text-label: #374151;
-  /* Gray-700 - Labels */
+  --color-text-secondary: #4B5563;
+  /* Gray-600 - Darker Secondary */
+  --color-text-muted: #6B7280;
+  /* Gray-500 - Darker Muted */
+  --color-text-label: #1F2937;
+  /* Gray-800 - Labels */
 
   /* Status Colors */
   --color-success: #10B981;
@@ -196,8 +197,10 @@ body {
 }
 
 .section-title {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 14px;
+  /* Larger */
+  font-weight: 800;
+  /* Bolder */
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: var(--color-text-primary);
@@ -224,10 +227,10 @@ body {
   width: 100%;
   padding: 12px 16px;
   /* Larger hit area */
-  background: var(--color-surface-elevated);
-  /* Light Gray Fill */
-  border: 1px solid transparent;
-  /* No visible border initially */
+  background: var(--color-surface);
+  /* White background for better contrast */
+  border: 1px solid var(--color-border);
+  /* Visible border */
   border-radius: var(--radius-md);
   color: var(--color-text-primary);
   font-family: var(--font-family);
