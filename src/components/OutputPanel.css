@@ -35,19 +35,21 @@
 }
 
 .output-area {
-    background: var(--color-surface);
-    /* White canvas */
-    border: none;
-    /* No border for clean look */
-    box-shadow: var(--shadow-md);
-    /* Soft lift */
-    border-radius: var(--radius-lg);
-    min-height: 350px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+    min-height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    margin-bottom: var(--spacing-lg);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .output-placeholder {
@@ -83,8 +85,9 @@
     display: flex;
     gap: var(--spacing-sm);
     padding: var(--spacing-md);
-    background: var(--color-surface-elevated);
-    border-top: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .scene-grid {
@@ -96,8 +99,9 @@
 .scene-card {
     position: relative;
     aspect-ratio: 16/9;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: var(--radius-md);
     overflow: hidden;
 }
@@ -114,7 +118,7 @@
     left: var(--spacing-sm);
     padding: var(--spacing-xs) var(--spacing-sm);
     background: rgba(0, 0, 0, 0.75);
-    color: var(--color-text-primary);
+    color: white;
     font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
