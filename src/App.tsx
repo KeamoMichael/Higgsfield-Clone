@@ -106,111 +106,122 @@ function App() {
       setError(result.error || 'Failed to generate image');
     }
 
-    const handleUseAsReference = useCallback((imageUrl: string) => {
-      const newRef: ReferenceImage = {
-        id: Date.now().toString(),
-        type: 'scene',
-        name: 'Generated Image',
-        data: imageUrl,
-      };
-      addReferenceImage(newRef);
-    }, [addReferenceImage]);
+    setIsGenerating(false);
+  }, [assembledPrompt, referenceImages]);
 
-    return (
-      <div className="app-layout">
-        {/* 1. Header (Floating) */}
-        <Header
-          isConnected={apiConnected}
-          onConnectClick={() => setShowSettings(true)}
-        />
+  const addReferenceImage = useCallback((image: ReferenceImage) => {
+    setReferenceImages(prev => [...prev, image]);
+  }, []);
 
-        {/* 2. Main Canvas Area */}
-        <main className="canvas-area">
-          <div style={{ width: '100%', maxWidth: '1200px', height: '100%' }}>
-            <OutputPanel
-              prompt={assembledPrompt}
-              isGenerating={isGenerating}
-              generatedImage={generatedImage}
-              sceneVariations={sceneVariations}
-              error={error}
-              apiConnected={apiConnected}
-              onUseAsReference={handleUseAsReference}
-            />
-          </div>
-        </main>
+  const removeReferenceImage = useCallback((id: string) => {
+    setReferenceImages(prev => prev.filter(img => img.id !== id));
+  }, []);
 
-        {/* 3. Command Bar (Replaces Floating Dock) */}
-        <CommandBar
-          prompt={promptData.subjectAction}
-          onPromptChange={(val) => updatePromptData('subjectAction', val)}
-          onGenerate={handleGenerate}
-          isGenerating={isGenerating}
-          activeTool={activeTool}
-          onToggleTool={(tool) => setActiveTool(activeTool === tool ? null : tool)}
-          resolution={resolution}
-          onResolutionChange={setResolution}
-        />
+  const handleUseAsReference = useCallback((imageUrl: string) => {
+    const newRef: ReferenceImage = {
+      id: Date.now().toString(),
+      type: 'scene',
+      name: 'Generated Image',
+      data: imageUrl,
+    };
+    addReferenceImage(newRef);
+  }, [addReferenceImage]);
 
-        {/* 4. Tool Modals */}
-        <InputModal
-          isOpen={activeTool === 'subject'}
-          onClose={() => setActiveTool(null)}
-          title="Subject & Framing"
-          icon="🎬"
-        >
-          <SubjectForm data={promptData} onChange={updatePromptData} />
-        </InputModal>
+  return (
+    <div className="app-layout">
+      {/* 1. Header (Floating) */}
+      <Header
+        isConnected={apiConnected}
+        onConnectClick={() => setShowSettings(true)}
+      />
 
-        <InputModal
-          isOpen={activeTool === 'lighting'}
-          onClose={() => setActiveTool(null)}
-          title="Lighting & Mood"
-          icon="☀️"
-        >
-          <PromptBuilder data={promptData} onChange={updatePromptData} view="lighting" />
-        </InputModal>
-
-        <InputModal
-          isOpen={activeTool === 'camera'}
-          onClose={() => setActiveTool(null)}
-          title="Camera Gear"
-          icon="📷"
-        >
-          <PromptBuilder data={promptData} onChange={updatePromptData} view="camera" />
-        </InputModal>
-
-        <InputModal
-          isOpen={activeTool === 'style'}
-          onClose={() => setActiveTool(null)}
-          title="Style & Aesthetics"
-          icon="🎨"
-        >
-          <PromptBuilder data={promptData} onChange={updatePromptData} view="style" />
-        </InputModal>
-
-        <InputModal
-          isOpen={activeTool === 'elements'}
-          onClose={() => setActiveTool(null)}
-          title="Reference Elements"
-          icon="🖼️"
-        >
-          <ElementsTool
-            referenceImages={referenceImages}
-            onAdd={addReferenceImage}
-            onRemove={removeReferenceImage}
+      {/* 2. Main Canvas Area */}
+      <main className="canvas-area">
+        <div style={{ width: '100%', maxWidth: '1200px', height: '100%' }}>
+          <OutputPanel
+            prompt={assembledPrompt}
+            isGenerating={isGenerating}
+            generatedImage={generatedImage}
+            sceneVariations={sceneVariations}
+            error={error}
+            apiConnected={apiConnected}
+            onUseAsReference={handleUseAsReference}
           />
-        </InputModal>
+        </div>
+      </main>
 
-        {/* Settings Modal */}
-        {showSettings && (
-          <SettingsModal
-            onClose={() => setShowSettings(false)}
-            onSave={handleSaveApiKey}
-            currentKey={hasApiKey() ? '••••••••••••••••••••' : ''}
-          />
-        )}
-      </div>
-    );
-  }
+      {/* 3. Command Bar (Replaces Floating Dock) */}
+      <CommandBar
+        prompt={promptData.subjectAction}
+        onPromptChange={(val) => updatePromptData('subjectAction', val)}
+        onGenerate={handleGenerate}
+        isGenerating={isGenerating}
+        activeTool={activeTool}
+        onToggleTool={(tool) => setActiveTool(activeTool === tool ? null : tool)}
+        resolution={resolution}
+        onResolutionChange={setResolution}
+      />
+
+      {/* 4. Tool Modals */}
+      <InputModal
+        isOpen={activeTool === 'subject'}
+        onClose={() => setActiveTool(null)}
+        title="Subject & Framing"
+        icon="🎬"
+      >
+        <SubjectForm data={promptData} onChange={updatePromptData} />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'lighting'}
+        onClose={() => setActiveTool(null)}
+        title="Lighting & Mood"
+        icon="☀️"
+      >
+        <PromptBuilder data={promptData} onChange={updatePromptData} view="lighting" />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'camera'}
+        onClose={() => setActiveTool(null)}
+        title="Camera Gear"
+        icon="📷"
+      >
+        <PromptBuilder data={promptData} onChange={updatePromptData} view="camera" />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'style'}
+        onClose={() => setActiveTool(null)}
+        title="Style & Aesthetics"
+        icon="🎨"
+      >
+        <PromptBuilder data={promptData} onChange={updatePromptData} view="style" />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'elements'}
+        onClose={() => setActiveTool(null)}
+        title="Reference Elements"
+        icon="🖼️"
+      >
+        <ElementsTool
+          referenceImages={referenceImages}
+          onAdd={addReferenceImage}
+          onRemove={removeReferenceImage}
+        />
+      </InputModal>
+
+      {/* Settings Modal */}
+      {showSettings && (
+        <SettingsModal
+          onClose={() => setShowSettings(false)}
+          onSave={handleSaveApiKey}
+          currentKey={hasApiKey() ? '••••••••••••••••••••' : ''}
+        />
+      )}
+    </div>
+  );
+}
 
 export default App;
