@@ -111,6 +111,10 @@
     right: 0;
     padding: 55px var(--spacing-sm) 18px;
     background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 40%, rgba(0, 0, 0, 0.95) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 4px;
 }
 
 .picker-item-label {
@@ -133,13 +137,13 @@
     font-weight: 500;
     letter-spacing: 0.2px;
     display: block;
-    margin-top: 4px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     opacity: 0.95;
     line-height: 1.2;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    margin: 0;
 }
 
 .picker-item-check {
