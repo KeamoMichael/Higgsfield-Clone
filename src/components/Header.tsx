@@ -1,31 +1,36 @@
-import './Header.css';
+
+import React from 'react';
 
 interface HeaderProps {
-    isConnected: boolean;
-    onConnectClick: () => void;
+    isConnected?: boolean;
+    onConnectClick?: () => void;
 }
 
-function Header({ isConnected, onConnectClick }: HeaderProps) {
+export default function Header({ isConnected, onConnectClick }: HeaderProps) {
     return (
-        <header className="app-header">
-            <div className="header-brand">
-                <h1 className="header-title">CINEMA STUDIO <span className="header-title-accent">PRO</span></h1>
-                <span className="header-tagline">// PROMPT LIKE A PHOTOGRAPHER</span>
+        <header className="fixed top-0 left-0 right-0 h-20 bg-[#0a0a0a]/80 backdrop-blur-3xl border-b border-white/5 z-50 flex items-center justify-between px-10">
+            <div className="flex items-center gap-8">
+                <div className="flex items-center">
+                    <span className="text-[17px] font-semibold tracking-tight text-white flex items-center gap-2.5">
+                        Cinema Studio
+                        <span className="text-[10px] bg-[#c7ff00] text-black px-1.5 py-0.5 rounded-[4px] font-black uppercase tracking-tighter">
+                            Pro
+                        </span>
+                    </span>
+                </div>
             </div>
 
-            <div className="header-actions">
+            <div className="flex items-center gap-6">
                 {isConnected ? (
-                    <div className="status-badge">
-                        <span className="status-dot"></span>
-                        SYSTEM READY
+                    <div className="flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-lg">
+                        <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                        <span className="text-[11px] font-bold text-green-500 uppercase tracking-wider">System Ready</span>
                     </div>
                 ) : (
-                    <button className="btn btn-outline" onClick={onConnectClick}>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-                            <polyline points="10 17 15 12 10 7" />
-                            <line x1="15" y1="12" x2="3" y2="12" />
-                        </svg>
+                    <button
+                        onClick={onConnectClick}
+                        className="custom-gradient-btn px-8 py-3 rounded-xl text-[12px] font-black tracking-tight transition-all active:scale-95 shadow-[0_0_25px_rgba(199,255,0,0.25)] hover:shadow-[0_0_35px_rgba(199,255,0,0.35)]"
+                    >
                         CONNECT API KEY
                     </button>
                 )}
@@ -33,5 +38,3 @@ function Header({ isConnected, onConnectClick }: HeaderProps) {
         </header>
     );
 }
-
-export default Header;

@@ -1,53 +1,63 @@
-import { useRef, useEffect, useState } from 'react';
-import './CommandBar.css';
+import React, { useRef, useEffect, useState } from 'react';
+import { Sparkles, Monitor, Film, Sun, Camera, Palette, Image as ImageIcon, Check } from 'lucide-react';
+import { Resolution, AspectRatio } from '../types';
 
 interface CommandBarProps {
     prompt: string;
-    onPromptChange: (value: string) => void;
-    onGenerate: () => void;
-    isGenerating: boolean;
-    activeTool: string | null;
-    onToggleTool: (tool: string) => void;
+    onPromptChange: (v: string) => void;
     resolution: string;
     onResolutionChange: (res: string) => void;
+    // Aspect ratio is new, adding local state handling for now or prop if App has it
+    // For now we'll handle it locally or add to App.tsx later. 
+    // Wait, let's keep it robust. I will add onAspectRatioChange prop.
+    aspectRatio?: string;
+    onAspectRatioChange?: (ar: string) => void;
+
+    isGenerating: boolean;
+    onGenerate: () => void;
+
+    // Existing modal props
+    activeTool: string | null;
+    onToggleTool: (tool: string) => void;
 }
 
 export default function CommandBar({
     prompt,
     onPromptChange,
-    onGenerate,
+    resolution,
+    onResolutionChange,
+    aspectRatio = '16:9',
+    onAspectRatioChange,
     isGenerating,
+    onGenerate,
     activeTool,
     onToggleTool,
-    resolution,
-    onResolutionChange
 }: CommandBarProps) {
     const [isAspectRatioMenuOpen, setIsAspectRatioMenuOpen] = useState(false);
-    const [aspectRatio, setAspectRatio] = useState('16:9');
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const menuRef = useRef<HTMLDivElement>(null);
 
+    // Map tools to existing IDs
     const tools = [
-        { id: 'subject', label: 'Subject', icon: '🎬' },
-        { id: 'lighting', label: 'Lighting', icon: '☀️' },
-        { id: 'camera', label: 'Camera', icon: '📷' },
-        { id: 'style', label: 'Style', icon: '🎨' },
-        { id: 'elements', label: 'Elements', icon: '🖼️' }
+        { id: 'subject', icon: <Film size={16} />, label: 'Subject' },
+        { id: 'lighting', icon: <Sun size={16} />, label: 'Lighting' },
+        { id: 'camera', icon: <Camera size={16} />, label: 'Lens' },
+        { id: 'style', icon: <Palette size={16} />, label: 'Color' },
+        { id: 'elements', icon: <ImageIcon size={16} />, label: 'Frame' }
     ];
 
-    const aspectRatios = ['16:9', '4:3', '1:1', '9:16'];
-
-    // Auto-grow textarea
+    // Handle auto-growing textarea based on content
     useEffect(() => {
         const textarea = textareaRef.current;
         if (textarea) {
             textarea.style.height = 'auto';
             const scrollHeight = textarea.scrollHeight;
+            // Clamp between 28px and 180px
             textarea.style.height = `${Math.max(28, Math.min(scrollHeight, 180))}px`;
         }
     }, [prompt]);
 
-    // Close aspect ratio menu on outside click
+    // Handle click outside to close the Aspect Ratio menu
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -61,116 +71,111 @@ export default function CommandBar({
     }, [isAspectRatioMenuOpen]);
 
     return (
-        <div className="command-bar-container">
-            <div className="command-bar-wrapper">
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 z-50">
+            <div className="bg-[#121212]/90 backdrop-blur-3xl border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.7)] rounded-[2.5rem] p-7 flex flex-col gap-5 transition-all duration-300">
 
-                {/* Top Section: Auto-growing Prompt */}
-                <div className="prompt-section">
+                {/* Top Section: Auto-growing Prompt Input */}
+                <div className="w-full">
                     <textarea
                         ref={textareaRef}
                         value={prompt}
                         onChange={(e) => onPromptChange(e.target.value)}
                         placeholder="Describe the cinematic scene..."
-                        className="prompt-textarea"
+                        className="w-full bg-transparent resize-none outline-none text-[15px] leading-relaxed text-white placeholder-gray-500 font-medium py-1 max-h-48 overflow-y-auto scrollbar-hide transition-[height] duration-200"
                         rows={1}
                     />
                 </div>
 
-                {/* Divider */}
-                <div className="section-divider"></div>
+                {/* Bottom Section: Controls and Action Button */}
+                <div className="flex items-center justify-between border-t border-white/5 pt-6">
 
-                {/* Bottom Section: Controls */}
-                <div className="controls-section">
-
-                    {/* Left: Aspect Ratio + Resolutions */}
-                    <div className="left-controls">
-
-                        {/* Aspect Ratio Dropdown */}
-                        <div className="aspect-ratio-wrapper" ref={menuRef}>
+                    {/* Left Controls: Aspect Ratio & Resolutions */}
+                    <div className="flex items-center gap-4">
+                        <div className="relative" ref={menuRef}>
                             <button
                                 onClick={() => setIsAspectRatioMenuOpen(!isAspectRatioMenuOpen)}
-                                className={`aspect-ratio-btn ${isAspectRatioMenuOpen ? 'active' : ''}`}
+                                className={`w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-300 ${isAspectRatioMenuOpen
+                                        ? 'bg-white text-black shadow-xl scale-105'
+                                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                    }`}
                                 title="Select Aspect Ratio"
                             >
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                    <line x1="8" y1="21" x2="16" y2="21"></line>
-                                    <line x1="12" y1="17" x2="12" y2="21"></line>
-                                </svg>
+                                <Monitor size={18} />
                             </button>
 
-                            {/* Aspect Ratio Menu */}
+                            {/* Aspect Ratio Floating Menu */}
                             {isAspectRatioMenuOpen && (
-                                <div className="aspect-ratio-menu">
-                                    <div className="menu-label">RATIO</div>
-                                    {aspectRatios.map((ratio) => (
+                                <div className="absolute bottom-full left-0 mb-4 w-44 bg-[#1a1a1a]/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden p-2.5 animate-in fade-in slide-in-from-bottom-2 duration-200">
+                                    <div className="text-[11px] font-bold text-white/30 px-3 py-2 uppercase tracking-[0.15em]">Ratio</div>
+                                    {[AspectRatio.LANDSCAPE, AspectRatio.PORTRAIT, AspectRatio.SQUARE, AspectRatio.WIDE].map((ratio) => (
                                         <button
                                             key={ratio}
                                             onClick={() => {
-                                                setAspectRatio(ratio);
+                                                if (onAspectRatioChange) onAspectRatioChange(ratio);
                                                 setIsAspectRatioMenuOpen(false);
                                             }}
-                                            className={`menu-item ${aspectRatio === ratio ? 'active' : ''}`}
+                                            className={`w-full flex items-center justify-between px-3 py-3 rounded-xl text-[13px] font-semibold transition-all ${aspectRatio === ratio
+                                                    ? 'bg-white/10 text-white'
+                                                    : 'text-gray-500 hover:text-white hover:bg-white/5'
+                                                }`}
                                         >
                                             <span>{ratio}</span>
-                                            {aspectRatio === ratio && (
-                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                                </svg>
-                                            )}
+                                            {aspectRatio === ratio && <Check size={16} className="text-[#c7ff00]" />}
                                         </button>
                                     ))}
                                 </div>
                             )}
                         </div>
 
-                        <div className="vertical-divider"></div>
+                        <div className="h-5 w-px bg-white/10 mx-1"></div>
 
-                        {/* Resolution Toggles */}
-                        <div className="resolution-group">
-                            {['1k', '2k', '4k'].map(res => (
+                        <div className="flex items-center gap-1.5">
+                            {[Resolution._1K, Resolution._2K, Resolution._4K].map((res) => (
                                 <button
                                     key={res}
                                     onClick={() => onResolutionChange(res)}
-                                    className={`res-toggle ${resolution === res ? 'active' : ''}`}
+                                    className={`px-4 py-2 rounded-lg text-[11px] font-extrabold tracking-tight transition-all duration-200 ${resolution === res
+                                            ? 'bg-white/10 text-white ring-1 ring-white/20'
+                                            : 'text-gray-500 hover:text-gray-300'
+                                        }`}
                                 >
-                                    {res.toUpperCase()}
+                                    {res}
                                 </button>
                             ))}
                         </div>
                     </div>
 
-                    {/* Right: Tools + Generate */}
-                    <div className="right-controls">
-
-                        {/* Tool Icons Strip */}
-                        <div className="tools-strip">
+                    {/* Right Group: Tools Strip and Main Action */}
+                    <div className="flex items-center gap-5">
+                        {/* Contextual Tools */}
+                        <div className="flex items-center gap-2 bg-black/40 rounded-2xl p-2 border border-white/5">
                             {tools.map((tool) => (
                                 <button
                                     key={tool.id}
                                     onClick={() => onToggleTool(tool.id)}
-                                    className={`tool-icon ${activeTool === tool.id ? 'active' : ''}`}
+                                    className={`w-9 h-9 flex items-center justify-center rounded-lg transition-all duration-300 ${activeTool === tool.id
+                                            ? 'bg-white text-black shadow-lg scale-100'
+                                            : 'text-gray-500 hover:text-white hover:bg-[#222]'
+                                        }`}
                                     title={tool.label}
                                 >
-                                    <span>{tool.icon}</span>
+                                    {React.cloneElement(tool.icon as React.ReactElement, { size: 16 })}
                                 </button>
                             ))}
                         </div>
 
-                        {/* Generate Button */}
+                        {/* Cinematic Generate Button */}
                         <button
                             onClick={onGenerate}
                             disabled={isGenerating || !prompt.trim()}
-                            className="generate-btn"
+                            className="custom-gradient-btn flex items-center justify-center gap-3 px-9 h-12 min-w-[150px] rounded-2xl font-black text-[12px] uppercase tracking-[0.08em] transition-all active:scale-95 disabled:opacity-40 disabled:grayscale shadow-[0_15px_30px_rgba(199,255,0,0.2)] hover:shadow-[0_20px_40px_rgba(199,255,0,0.3)]"
                         >
                             {isGenerating ? (
-                                <div className="spinner"></div>
+                                <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin" />
                             ) : (
                                 <>
-                                    <span>GENERATE</span>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                    </svg>
+                                    <span>Generate</span>
+                                    <Sparkles size={16} className="fill-black" />
                                 </>
                             )}
                         </button>
