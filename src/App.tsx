@@ -5,6 +5,9 @@ import SettingsModal from './components/SettingsModal';
 import PromptBuilder from './components/PromptBuilder';
 import OutputPanel from './components/OutputPanel';
 import ElementsTool from './components/ElementsTool';
+import FloatingDock from './components/FloatingDock';
+import InputModal from './components/InputModal';
+import SubjectForm from './components/SubjectForm';
 import type { PromptData } from './services/promptBuilder';
 import { assemblePrompt, generateSceneJSON } from './services/promptBuilder';
 import type { GenerationResult } from './services/geminiService';
@@ -46,6 +49,9 @@ function App() {
   const [sceneVariations, setSceneVariations] = useState<GenerationResult[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [referenceImages, setReferenceImages] = useState<ReferenceImage[]>([]);
+
+  // NEW: Modal State
+  const [activeTool, setActiveTool] = useState<string | null>(null);
 
   // Assemble prompt whenever data changes
   const assembledPrompt = useMemo(() => {
@@ -150,48 +156,100 @@ function App() {
     addReferenceImage(newRef);
   }, [addReferenceImage]);
 
+  // Dock Items Configuration
+  const dockItems = [
+    { id: 'subject', label: 'Subject', icon: <span>🎬</span> },
+    { id: 'lighting', label: 'Lighting', icon: <span>☀️</span> },
+    { id: 'camera', label: 'Camera', icon: <span>📷</span> },
+    { id: 'style', label: 'Style', icon: <span>🎨</span> },
+    { id: 'elements', label: 'Elements', icon: <span>🖼️</span> },
+  ];
+
   return (
     <div className="app-layout">
+      {/* 1. Header (Floating) */}
       <Header
         isConnected={apiConnected}
         onConnectClick={() => setShowSettings(true)}
       />
 
-      {/* Left Panel - Prompt Builder */}
-      <div className="panel panel-left">
-        <PromptBuilder
-          data={promptData}
-          onChange={updatePromptData}
-        />
-      </div>
+      {/* 2. Main Canvas Area */}
+      <main className="canvas-area">
+        <div style={{ width: '100%', maxWidth: '1200px', height: '100%' }}>
+          <OutputPanel
+            prompt={assembledPrompt}
+            resolution={resolution}
+            onResolutionChange={setResolution}
+            onGenerate={handleGenerate}
+            onGenerateScene={handleGenerateScene}
+            onCopyPrompt={handleCopyPrompt}
+            onCopySceneJSON={handleCopySceneJSON}
+            isGenerating={isGenerating}
+            generatedImage={generatedImage}
+            sceneVariations={sceneVariations}
+            error={error}
+            apiConnected={apiConnected}
+            onUseAsReference={handleUseAsReference}
+          />
+        </div>
+      </main>
 
-      {/* Center Panel - Output */}
-      <div className="panel panel-center">
-        <OutputPanel
-          prompt={assembledPrompt}
-          resolution={resolution}
-          onResolutionChange={setResolution}
-          onGenerate={handleGenerate}
-          onGenerateScene={handleGenerateScene}
-          onCopyPrompt={handleCopyPrompt}
-          onCopySceneJSON={handleCopySceneJSON}
-          isGenerating={isGenerating}
-          generatedImage={generatedImage}
-          sceneVariations={sceneVariations}
-          error={error}
-          apiConnected={apiConnected}
-          onUseAsReference={handleUseAsReference}
-        />
-      </div>
+      {/* 3. Floating Dock */}
+      <FloatingDock
+        items={dockItems}
+        activeId={activeTool}
+        onSelect={setActiveTool}
+      />
 
-      {/* Right Panel - Elements Tool */}
-      <div className="panel panel-right">
+      {/* 4. Tool Modals */}
+      <InputModal
+        isOpen={activeTool === 'subject'}
+        onClose={() => setActiveTool(null)}
+        title="Subject & Framing"
+        icon="🎬"
+      >
+        <SubjectForm data={promptData} onChange={updatePromptData} />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'lighting'}
+        onClose={() => setActiveTool(null)}
+        title="Lighting & Mood"
+        icon="☀️"
+      >
+        <PromptBuilder data={promptData} onChange={updatePromptData} view="lighting" />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'camera'}
+        onClose={() => setActiveTool(null)}
+        title="Camera Gear"
+        icon="📷"
+      >
+        <PromptBuilder data={promptData} onChange={updatePromptData} view="camera" />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'style'}
+        onClose={() => setActiveTool(null)}
+        title="Style & Aesthetics"
+        icon="🎨"
+      >
+        <PromptBuilder data={promptData} onChange={updatePromptData} view="style" />
+      </InputModal>
+
+      <InputModal
+        isOpen={activeTool === 'elements'}
+        onClose={() => setActiveTool(null)}
+        title="Reference Elements"
+        icon="🖼️"
+      >
         <ElementsTool
           referenceImages={referenceImages}
           onAdd={addReferenceImage}
           onRemove={removeReferenceImage}
         />
-      </div>
+      </InputModal>
 
       {/* Settings Modal */}
       {showSettings && (
